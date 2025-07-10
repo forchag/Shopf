@@ -1,6 +1,5 @@
 <div align="center">
 <h1 align="center">Django Online Shop</h1>
-<h3 align="center">It's my biggest peroject that i've ever done, I spent a lot of time on it</h3>
 </div>
 <p align="center">
 <a href="https://www.python.org" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a>
