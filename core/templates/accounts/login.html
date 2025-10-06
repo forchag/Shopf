@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 
 {% block content %}
@@ -6,8 +7,8 @@
     <div class="flex-grow-1 mx-auto" style="max-width: 28rem;">
         <!-- Heading -->
         <div class="text-center mb-5 mb-md-7">
-            <h1 class="h2">فرم ورود</h1>
-            <p>برای مدیریت حساب خود وارد شوید.</p>
+            <h1 class="h2">{% trans "Login form" %}</h1>
+            <p>{% trans "Sign in to manage your account." %}</p>
         </div>
         <!-- End Heading -->
 
@@ -16,23 +17,23 @@
             {% csrf_token %}
             <!-- Form -->
             <div class="mb-4">
-                <label class="form-label" for="signupSimpleLoginEmail">ایمیل شما</label>
+                <label class="form-label" for="signupSimpleLoginEmail">{% trans "Email address" %}</label>
                 <input type="email" class="form-control form-control-lg text-center" name="username"
-                    id="signupSimpleLoginEmail" placeholder="email@site.com" aria-label="email@site.com" required>
-                <span class="invalid-feedback">لطفا یک آدرس ایمیل معتبر وارد کنید.</span>
+                    id="signupSimpleLoginEmail" placeholder="{% trans 'email@site.com' %}" aria-label="{% trans 'email@site.com' %}" required>
+                <span class="invalid-feedback">{% trans "Please enter a valid email address." %}</span>
             </div>
             <!-- End Form -->
 
             <!-- Form -->
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center">
-                    <label class="form-label" for="signupSimpleLoginPassword">کلمه عبور</label>
+                    <label class="form-label" for="signupSimpleLoginPassword">{% trans "Password" %}</label>
 
                 </div>
 
                 <div class="input-group input-group-merge" data-hs-validation-validate-class>
                     <input type="password" class="js-toggle-password form-control form-control-lg text-center" name="password"
-                      id="signupSimpleLoginPassword" placeholder="8+ characters required" aria-label="8+ characters required"
+                      id="signupSimpleLoginPassword" placeholder="{% trans '8+ characters required' %}" aria-label="{% trans '8+ characters required' %}"
                       required minlength="8" data-hs-toggle-password-options='{
                       "target": "#changePassTarget",
                       "defaultClass": "bi-eye-slash",
@@ -44,17 +45,17 @@
                     </a>
                   </div>
 
-                <span class="invalid-feedback">لطفا یک گذر واژه معتبر وارد کنید.</span>
+                <span class="invalid-feedback">{% trans "Please enter a valid password." %}</span>
             </div>
             <!-- End Form -->
 
             <div class="d-grid mb-3">
-                <a class="form-label-link" href="{% url 'password_reset' %}">رمز عبور را فراموش کرده اید؟</a>
-                <button type="submit" class="btn btn-primary btn-lg">ورود</button>
+                <a class="form-label-link" href="{% url 'password_reset' %}">{% trans "Forgot your password?" %}</a>
+                <button type="submit" class="btn btn-primary btn-lg">{% trans "Sign in" %}</button>
             </div>
 
             <div class="text-center">
-                <p>حساب کاربری ندارید؟ <a class="link" href="{% url 'sign-up' %}">اینجا ثبت نام کنید</a></p>
+                <p>{% trans "Don't have an account?" %} <a class="link" href="{% url 'sign-up' %}">{% trans "Register here" %}</a></p>
             </div>
             {{form.captcha}}
         </form>
