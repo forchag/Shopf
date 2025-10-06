@@ -1,11 +1,12 @@
 {% load static %}
 {% load humanize %}
+{% load i18n %}
 
     <!-- Card Grid -->
     <div class="container content-space-2 content-space-lg-3">
         <!-- Title -->
         <div class="w-md-75 w-lg-50 text-center mx-md-auto mb-5 mb-md-9">
-          <h2>فقط برای شما</h2>
+          <h2>{% trans "Just for you" %}</h2>
         </div>
         <!-- End Title -->
   
@@ -18,14 +19,14 @@
                   <img class="card-img-top" src="http://127.0.0.1:9000/media/{{ similar_prod.product_image_related.all.first.image }}" alt="Image Description">
                   {% if similar_prod.stock == 0 %}
                   <div class="card-pinned-top-start">
-                    <span class="badge bg-danger rounded-pill">اتمام موجودی</span>
+                    <span class="badge bg-danger rounded-pill">{% trans "Out of stock" %}</span>
                   </div>
                   {% endif %}
 
                   {% if request.user.is_authenticated %}
                   <div class="card-pinned-top-end">
                     <button type="button" class="btn btn-outline-danger btn-xs btn-icon rounded-circle {% if similar_prod.id in is_wished %}active{% endif %}" 
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به علایق" onclick="modify_wish(this,`{{similar_prod.id}}`)">
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Add to wishlist' %}" onclick="modify_wish(this,`{{similar_prod.id}}`)">
                       <i class="bi-heart"></i>
                     </button>
                   </div>
@@ -37,7 +38,7 @@
                     {% for cat in similar_prod.category.all %}
                     <a class="link-sm link-secondary" href="#">{{cat}}</a>
                     {% if not forloop.last %}
-                      ،
+                      ,
                     {% endif %}
                     {% endfor %}
                   </div>
@@ -46,9 +47,9 @@
                     <a class="text-dark" href="{% url 'shop:detail' slug=similar_prod.slug %}">{{similar_prod.title}}</a>
                   </h4>
                   {% if similar_prod.discount_percent %}
-                  <p class="card-text text-dark">{{similar_prod.offer|intcomma}} <span class="text-body ms-1"><del>{{similar_prod.price|intcomma}} تومان</del></span></p>
+                  <p class="card-text text-dark">{{similar_prod.offer|intcomma}} {% trans "Toman" %} <span class="text-body ms-1"><del>{{similar_prod.price|intcomma}} {% trans "Toman" %}</del></span></p>
                   {% else %}
-                  <p class="card-text text-dark">{{similar_prod.price|intcomma}} تومان</p>
+                  <p class="card-text text-dark">{{similar_prod.price|intcomma}} {% trans "Toman" %}</p>
                   {% endif %}
                 </div>
 
@@ -67,7 +68,7 @@
                   </div>
                   <!-- End Rating -->
 
-                  <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>
+                  <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">{% trans "Add to cart" %}</button>
                 </div>
               </div>
               <!-- End Card -->

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load humanize %}
+{% load i18n %}
 
 {% block content %}
     <!-- Breadcrumb -->
@@ -8,7 +9,7 @@
       <div class="container py-4">
         <div class="row">
           <div class="col-sm">
-            <h4 class="mb-0">شبکه محصولات</h4>
+            <h4 class="mb-0">{% trans "Product grid" %}</h4>
           </div>
           <!-- End Col -->
 
@@ -17,12 +18,12 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb mb-0 ">
                 <li class="breadcrumb-item ps-2">
-                  <a href="/index.html">خرید کنید</a>
+                  <a href="/index.html">{% trans "Shop" %}</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a href="/products-grid.html">محصولات</a>
+                  <a href="/products-grid.html">{% trans "Products" %}</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">توری</li>
+                <li class="breadcrumb-item active" aria-current="page">{% trans "Grid" %}</li>
               </ol>
             </nav>
             <!-- End Breadcrumb -->
@@ -44,7 +45,7 @@
             <div class="d-grid">
               <button type="button" class="navbar-toggler btn btn-white mb-3" data-bs-toggle="collapse" data-bs-target="#navbarVerticalNavMenu" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navbarVerticalNavMenu">
                 <span class="d-flex justify-content-between align-items-center">
-                  <span class="text-dark">فیلتر کنید</span>
+                  <span class="text-dark">{% trans "Filter" %}</span>
 
                   <span class="navbar-toggler-default">
                     <i class="bi-list"></i>
@@ -63,38 +64,38 @@
               <form action="." class="w-100">
 
                   <div class="border-bottom pb-4 mb-4">
-                      <h5>جستو جوی کالا</h5>
+                      <h5>{% trans "Product search" %}</h5>
                       <div class="d-grid gap-2">
                           <div class="form-group">
-                              <label class="form-label d-flex" for="search-query-filter">جستو جو</label>
-                              <input class="form-control" placeholder="واژه مورد نظر را وارد نمایید" type="text"
+                              <label class="form-label d-flex" for="search-query-filter">{% trans "Search" %}</label>
+                              <input class="form-control" placeholder="{% trans "Enter the desired term" %}" type="text"
                                   name="q" id="search-query-filter">
                           </div>
                       </div>
                   </div>
                   <div class="border-bottom pb-4 mb-4">
-                      <h5>قیمت</h5>
+                      <h5>{% trans "Price" %}</h5>
                       <div class="d-grid gap-2">
 
                           <div class="form-group">
-                              <label class="form-label d-flex" for="min-price-filter">کمترین قیمت</label>
+                              <label class="form-label d-flex" for="min-price-filter">{% trans "Minimum price" %}</label>
                               <input class="form-control" type="number" name="min_price"
-                                  placeholder="کمترین قیمت مد نظر" id="min-price-filter">
+                                  placeholder="{% trans "Desired minimum price" %}" id="min-price-filter">
                           </div>
                           <div class="form-group">
-                              <label class="form-label d-flex" for="max-price-filter">بیشترین قیمت</label>
+                              <label class="form-label d-flex" for="max-price-filter">{% trans "Maximum price" %}</label>
                               <input class="form-control" type="number" name="max_price"
-                                  placeholder="بیشترین قیمت مد نظر" id="max-price-filter">
+                                  placeholder="{% trans "Desired maximum price" %}" id="max-price-filter">
                           </div>
                       </div>
                   </div>
                   <div class="border-bottom pb-4 mb-4">
-                      <h5>دسته بندی</h5>
+                      <h5>{% trans "Category" %}</h5>
                       <div class="d-grid gap-2">
                           <div class="mb-2 mb-sm-0 me-sm-2">
                               <select class="form-select form-select-sm" name="category_id"
                                   id="category-id-filter">
-                                  <option value="" selected>انتخاب دسته بندی</option>
+                                  <option value="" selected>{% trans "Select category" %}</option>
                                   {% for category in categories %}
                                   <option value="{{category.id}}">{{category.title}}</option>
                                   {% endfor %}
@@ -103,10 +104,10 @@
                       </div>
                   </div>
                   <div class="d-grid">
-                      <button type="submit" class="btn btn-outline-primary btn-transition mb-3">اعمال
-                          فیلتر</button>
+                      <button type="submit" class="btn btn-outline-primary btn-transition mb-3">{% trans "Apply filter" %}
+                          </button>
                       <a href="{% url 'shop:list' %}"
-                          class="btn btn-outline-danger btn-transition mb-3">حذف فیلتر ها</a>
+                          class="btn btn-outline-danger btn-transition mb-3">{% trans "Clear filters" %}</a>
                   </div>
               </form>
           </div>
@@ -119,7 +120,7 @@
         <div class="col-lg-9">
           <div class="row align-items-center mb-5">
             <div class="col-sm mb-3 mb-sm-0">
-              <h6 class="mb-0">{{total_prod}} محصول</h6>
+              <h6 class="mb-0">{% blocktrans count product_count=total_prod %}{{ product_count }} product{% plural %}{{ product_count }} products{% endblocktrans %}</h6>
             </div>
 
             <div class="col-sm-auto">
@@ -127,8 +128,8 @@
                 <!-- Select -->
                 <div class="mb-2 mb-sm-0 me-sm-2">
                   <select class="form-select form-select-sm" id="order-by-filter">
-                    <option value="-created_date" selected>جدیدترین</option>
-                    <option value="created_date">قدیمی ترین</option>
+                    <option value="-created_date" selected>{% trans "Newest" %}</option>
+                    <option value="created_date">{% trans "Oldest" %}</option>
                   </select>
                 </div>
                 <!-- End Select -->
@@ -136,7 +137,7 @@
                 <!-- Select -->
                 <div class="mb-2 mb-sm-0 me-sm-2">
                   <select class="form-select form-select-sm" id="page-size-filter">
-                    <option value="" selected>تعداد در صفحه</option>
+                    <option value="" selected>{% trans "Items per page" %}</option>
                     <option value="1">1</option>
                     <option value="20">20</option>
                     <option value="30">30</option>
@@ -174,7 +175,7 @@
                     <img class="card-img-top" src="{{ object.product_image_related.all.first.image.url }}" alt="Image Description">
                     {% if object.stock == 0 %}
                     <div class="card-pinned-top-start">
-                      <span class="badge bg-danger rounded-pill">اتمام موجودی</span>
+                      <span class="badge bg-danger rounded-pill">{% trans "Out of stock" %}</span>
                     </div>
                     {% endif %}
                   </div>
@@ -187,7 +188,7 @@
                       {% for cat in object.category.all %}
                       <a class="link-sm link-secondary" href="#">{{cat}}</a>
                       {% if not forloop.last %}
-                        ،
+                        ,
                       {% endif %}
                       {% endfor %}
                     </div>
@@ -197,9 +198,9 @@
                         <a class="text-dark" href="/product-overview.html">{{object.title}}</a>
                       </h4>
                       {% if object.discount_percent %}
-                      <p class="card-text text-dark">{{object.offer|intcomma}} تومان<span class="text-body ms-1"><del>{{object.price|intcomma}} تومان</del></span></p>
+                      <p class="card-text text-dark">{{object.offer|intcomma}} {% trans "Toman" %}<span class="text-body ms-1"><del>{{object.price|intcomma}} {% trans "Toman" %}</del></span></p>
                       {% else %}
-                      <p class="card-text text-dark">{{object.price|intcomma}} تومان</p>
+                      <p class="card-text text-dark">{{object.price|intcomma}} {% trans "Toman" %}</p>
                       {% endif %}
                     </div>
 
@@ -220,14 +221,14 @@
                     <div class="card-footer">
                       <div class="d-flex gap-2">
                         {% if not object.stock %}
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">موجود شد بهم اطلاع بده</button>
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">{% trans "Notify me when available" %}</button>
                         {% else %}
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill" onclick="addProd(`{{object.id}}`)">افزودن به سبد خرید</button>
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill" onclick="addProd(`{{object.id}}`)">{% trans "Add to cart" %}</button>
                         {% endif %}
                         {% if request.user.is_authenticated %}
                         <button type="button" class="btn btn-soft-danger btn-sm btn-transition rounded-pill {% if object.id in is_wished %}active{% endif %}"
                         onclick="modify_wish(this,`{{object.id}}`)">
-                          <i class="bi-heart ms-1"></i>افزودن به علایق</button>
+                          <i class="bi-heart ms-1"></i>{% trans "Add to wishlist" %}</button>
                         {% endif %}
                       </div>
                     </div>
@@ -291,8 +292,8 @@
           <div class="row justify-content-lg-between">
             <!-- Heading -->
             <div class="mb-5">
-              <span class="text-cap">ثبت نام</span>
-              <h2>اخبار جدید را دریافت کنید</h2>
+              <span class="text-cap">{% trans "Sign up" %}</span>
+              <h2>{% trans "Get the latest news" %}</h2>
             </div>
             <!-- End Heading -->
 
@@ -300,15 +301,15 @@
               <!-- Input Card -->
               <div class="input-card input-card-pill input-card-sm border mb-3">
                 <div class="input-card-form">
-                  <label for="subscribeForm" class="form-label visually-hidden">ایمیل را وارد کنید</label>
-                  <input type="text" class="form-control form-control-lg" id="subscribeForm" placeholder="ایمیل خود را وارد کنید" aria-label="ایمیل خود را وارد کنید">
+                  <label for="subscribeForm" class="form-label visually-hidden">{% trans "Enter email" %}</label>
+                  <input type="text" class="form-control form-control-lg" id="subscribeForm" placeholder="{% trans "Enter your email" %}" aria-label="{% trans "Enter your email" %}">
                 </div>
-                <button type="button" class="btn btn-primary btn-lg rounded-pill">ثبت نام</button>
+                <button type="button" class="btn btn-primary btn-lg rounded-pill">{% trans "Sign up" %}</button>
               </div>
               <!-- End Input Card -->
             </form>
 
-            <p class="small">می توانید در هر زمانی اشتراک خود را لغو کنید <a href="#">سیاست حفظ حریم خصوصی</a> ما را بخوانید</p>
+            <p class="small">{% blocktrans trimmed %}You can unsubscribe at any time. Read our <a href="#">Privacy policy</a>.{% endblocktrans %}</p>
           </div>
         </div>
       </div>

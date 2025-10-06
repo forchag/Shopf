@@ -1,4 +1,9 @@
-{% extends "base.html" %} {% load static %} {% load humanize %} {% load shop_tags %} {% block content %}
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% load shop_tags %}
+{% load i18n %}
+{% block content %}
 <!-- Hero -->
 <div class="container content-space-t-1 content-space-t-sm-1">
   <div class="row">
@@ -72,13 +77,13 @@
 
       <!-- Price -->
       <div class="mb-5">
-        <span class="d-block mb-2">قیمت کل:</span>
+        <span class="d-block mb-2">{% trans "Total price:" %}</span>
         <div class="d-flex align-items-center">
           {% if object.discount_pecent %}
-          <h3 class="mb-0">{{object.offer|intcomma}}</h3>
-          <span class="ms-2"><del>{{object.price|intcomma}}</del></span>
+          <h3 class="mb-0">{{object.offer|intcomma}} {% trans "Toman" %}</h3>
+          <span class="ms-2"><del>{{object.price|intcomma}} {% trans "Toman" %}</del></span>
           {% else %}
-          <h3 class="mb-0">{{object.price|intcomma}} تومان</h3>
+          <h3 class="mb-0">{{object.price|intcomma}} {% trans "Toman" %}</h3>
           {% endif %}
         </div>
       </div>
@@ -121,7 +126,7 @@
                   </svg>
                 </span>
               </div>
-              <div class="flex-grow-1 ms-3">ارسال رایگان</div>
+              <div class="flex-grow-1 ms-3">{% trans "Free shipping" %}</div>
             </div>
           </a>
 
@@ -132,8 +137,7 @@
           >
             <div class="accordion-body">
               <p class="mb-0">
-                ما ارسال رایگان را در هر نقطه از ایالات متحده ارائه می دهیم، یک
-                تیم ماهر تحویل جعبه ها را به دفتر شما می آورد.
+                {% trans "We offer free shipping anywhere in the United States, and a skilled team delivers the boxes to your office." %}
               </p>
             </div>
           </div>
@@ -179,7 +183,7 @@
                   </svg>
                 </span>
               </div>
-              <div class="flex-grow-1 ms-3">30 روز بازگشت</div>
+              <div class="flex-grow-1 ms-3">{% trans "30-day return" %}</div>
             </div>
           </a>
 
@@ -190,8 +194,7 @@
           >
             <div class="accordion-body">
               <p class="mb-0">
-                اگر راضی نیستید، آن را برای بازپرداخت کامل بازگردانید. ما از
-                جداسازی قطعات و حمل و نقل برگشت مراقبت خواهیم کرد.
+                {% trans "If you are not satisfied, return it for a full refund. We will take care of disassembly and return shipping." %}
               </p>
             </div>
           </div>
@@ -207,11 +210,11 @@
           class="btn btn-primary btntransition"
           onclick="addProd(`{{object.id}}`)"
         >
-          افزودن به سبد خرید
+          {% trans "Add to cart" %}
         </button>
         {% else %}
         <button type="button" class="btn btn-primary btntransition">
-          موجود شد بهم اطلاع بده
+          {% trans "Notify me when available" %}
         </button>
         {% endif %}
       </div>
@@ -244,8 +247,8 @@
           </div>
         </div>
         <div class="flex-grow-1 ms-2">
-          <span class="small me-1">نیاز به پشتیبانی دارید؟</span>
-          <a class="link small" href="#">ارسال تیکت</a>
+          <span class="small me-1">{% trans "Need support?" %}</span>
+          <a class="link small" href="#">{% trans "Submit a ticket" %}</a>
         </div>
       </div>
       <!-- End Media -->
@@ -288,7 +291,7 @@
                     {% endfor %}
                   </div>
                   <!-- End Rating -->
-                  <span class="text-white">{{reviews.count}} نظر</span>
+                  <span class="text-white">{% blocktrans count review_count=reviews.count %}{{ review_count }} review{% plural %}{{ review_count }} reviews{% endblocktrans %}</span>
                 </div>
               </div>
             </div>
@@ -297,13 +300,13 @@
         </div>
         <!-- End Card -->
 
-        <h3>تجزیه رتبه</h3>
+        <h3>{% trans "Rating breakdown" %}</h3>
 
         <!-- Ratings -->
         <div class="d-grid gap-1">
           <a class="row align-items-center" href="#" style="max-width: 25rem">
             <div class="col-3">
-              <span class="text-dark">5 ستاره</span>
+              <span class="text-dark">{% trans "5 stars" %}</span>
             </div>
             <!-- End Col -->
 
@@ -330,7 +333,7 @@
 
           <a class="row align-items-center" href="#" style="max-width: 25rem">
             <div class="col-3">
-              <span class="text-dark">4 ستاره</span>
+              <span class="text-dark">{% trans "4 stars" %}</span>
             </div>
             <!-- End Col -->
 
@@ -357,7 +360,7 @@
 
           <a class="row align-items-center" href="#" style="max-width: 25rem">
             <div class="col-3">
-              <span class="text-dark">3 ستاره</span>
+              <span class="text-dark">{% trans "3 stars" %}</span>
             </div>
             <!-- End Col -->
 
@@ -384,7 +387,7 @@
 
           <a class="row align-items-center" href="#" style="max-width: 25rem">
             <div class="col-3">
-              <span class="text-dark">2 ستاره</span>
+              <span class="text-dark">{% trans "2 stars" %}</span>
             </div>
             <!-- End Col -->
 
@@ -411,7 +414,7 @@
 
           <a class="row align-items-center" href="#" style="max-width: 25rem">
             <div class="col-3">
-              <span class="text-dark">1 ستاره</span>
+              <span class="text-dark">{% trans "1 star" %}</span>
             </div>
             <!-- End Col -->
 
@@ -440,7 +443,7 @@
       </div>
 
       <h4 class="display-4 text-primary">77%</h4>
-      <p class="small">مشتریان این محصول را توصیه می کنند</p>
+      <p class="small">{% trans "Customers recommend this product" %}</p>
     </div>
     <!-- End Col -->
 
@@ -450,13 +453,13 @@
                   <div class="border-bottom pb-4 mb-4">
                       <div class="row align-items-center">
                           <div class="col-sm mb-2 mb-sm-0">
-                              <h4 class="mb-0">دیدگاه ها</h4>
+                              <h4 class="mb-0">{% trans "Reviews" %}</h4>
                           </div>
   
                           <div class="col-sm-auto mb-2 text-center">
                               <button type="button" class="btn btn-primary btn-transition rounded-pill"
                                   data-bs-toggle="modal" data-bs-target="#submitReviewModal">
-                                  ثبت دیدگاه</button>
+                                  {% trans "Submit review" %}</button>
                           </div>
                           <!-- End Col -->
                       </div>
@@ -507,20 +510,20 @@
             </div>
 
             <div class="mb-2">
-              <span class="text-dark fw-semibold">کریستینا</span>
-              <span>- خرید تایید شده</span>
+              <span class="text-dark fw-semibold">{% trans "Christina" %}</span>
+              <span>- {% trans "Verified purchase" %}</span>
             </div>
 
             <!-- Media -->
             <div class="d-flex align-items-center">
-              <span class="small me-2">آیا این مفید بود؟</span>
+              <span class="small me-2">{% trans "Was this helpful?" %}</span>
 
               <div class="d-flex gap-2">
                 <a class="btn btn-white btn-xs" href="javascript:;">
-                  <i class="bi-hand-thumbs-up me-1"></i> Yes <span>(45)</span>
+                  <i class="bi-hand-thumbs-up me-1"></i> {% trans "Yes" %} <span>(45)</span>
                 </a>
                 <a class="btn btn-white btn-xs" href="javascript:;">
-                  <i class="bi-hand-thumbs-down me-1"></i> نه <span>(21)</span>
+                  <i class="bi-hand-thumbs-down me-1"></i> {% trans "No" %} <span>(21)</span>
                 </a>
               </div>
             </div>
@@ -545,8 +548,8 @@
       <div class="row justify-content-lg-between">
         <!-- Heading -->
         <div class="mb-5">
-          <span class="text-cap">ثبت نام</span>
-          <h2>اخبار جدید را دریافت کنید</h2>
+          <span class="text-cap">{% trans "Sign up" %}</span>
+          <h2>{% trans "Get the latest news" %}</h2>
         </div>
         <!-- End Heading -->
 
@@ -555,26 +558,25 @@
           <div class="input-card input-card-pill input-card-sm border mb-3">
             <div class="input-card-form">
               <label for="subscribeForm" class="form-label visually-hidden"
-                >ایمیل را وارد کنید</label
+                >{% trans "Enter email" %}</label
               >
               <input
                 type="text"
                 class="form-control form-control-lg"
                 id="subscribeForm"
-                placeholder="ایمیل خود را وارد کنید"
-                aria-label="ایمیل خود را وارد کنید"
+                placeholder="{% trans "Enter your email" %}"
+                aria-label="{% trans "Enter your email" %}"
               />
             </div>
             <button type="button" class="btn btn-primary btn-lg rounded-pill">
-              ثبت نام
+              {% trans "Sign up" %}
             </button>
           </div>
           <!-- End Input Card -->
         </form>
 
         <p class="small">
-          می توانید در هر زمانی اشتراک خود را لغو کنید
-          <a href="#">سیاست حفظ حریم خصوصی</a> ما را بخوانید
+          {% blocktrans trimmed %}You can unsubscribe at any time. Read our <a href="#">Privacy policy</a>.{% endblocktrans %}
         </p>
       </div>
     </div>
@@ -589,7 +591,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="submitReviewModalLabel">فرم ارسال دیدگاه</h5>
+                <h5 class="modal-title" id="submitReviewModalLabel">{% trans "Review submission form" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -599,18 +601,18 @@
                     <input hidden name="product" value="{{object.id}}">
                     <div class="row">
                         <div class="mb-3">
-                            <label class="form-label" for="rateModalInput">امتیاز</label>
+                            <label class="form-label" for="rateModalInput">{% trans "Rating" %}</label>
                             <select class="form-select form-select-sm" name="rate" required>
-                                <option value="1">1 ستاره</option>
-                                <option value="2">2 ستاره</option>
-                                <option value="3">3 ستاره</option>
-                                <option value="4">4 ستاره</option>
-                                <option value="5" selected>5 ستاره</option>
+                                <option value="1">{% trans "1 star" %}</option>
+                                <option value="2">{% trans "2 stars" %}</option>
+                                <option value="3">{% trans "3 stars" %}</option>
+                                <option value="4">{% trans "4 stars" %}</option>
+                                <option value="5" selected>{% trans "5 stars" %}</option>
 
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="descriptionModalInput">توضیحات</label>
+                            <label class="form-label" for="descriptionModalInput">{% trans "Description" %}</label>
                             <textarea type="text" class="form-control form-control-lg" id="descriptionModalInput"
                                 name="description" required> </textarea>
                         </div>
@@ -619,8 +621,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                <button class="btn btn-primary" type="submit" form="review-form">ثبت دیدگاه</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
+                <button class="btn btn-primary" type="submit" form="review-form">{% trans "Submit review" %}</button>
             </div>
         </div>
     </div>
