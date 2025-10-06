@@ -1,5 +1,6 @@
 {% extends "dashboard/admin/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
     <!-- Card -->
@@ -7,7 +8,7 @@
         <!-- Header -->
         <div class="card-header border-bottom">
           <div class="d-flex justify-content-between align-items-center">
-            <h5 class="">لیست کاربران</h5>
+            <h5 class="">{% trans "User list" %}</h5>
           </div>
         </div>
         <!-- End Header -->
@@ -19,14 +20,14 @@
 
               <!-- Input Card -->
               <div class="col-md-5 py-1">
-                <input type="text" class="form-control" placeholder="جستجوی" aria-label="جستجوی ایمیل" name="q" id="search-query-filter">
+                <input type="text" class="form-control" placeholder="{% trans 'Search' %}" aria-label="{% trans 'Search email' %}" name="q" id="search-query-filter">
 
               </div>
               <!-- End Input Card -->
               <div class="col-md-3 py-1">
                 <select class="form-select" name="order_by" id="order-by-filter">
-                  <option value="-created_date">جدیدترین</option>
-                  <option value="created_date">قدیمی ترین</option>
+                  <option value="-created_date">{% trans "Newest" %}</option>
+                  <option value="created_date">{% trans "Oldest" %}</option>
                 </select>
               </div>
               <div class="col-md-1 py-1">
@@ -43,12 +44,12 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">نام</th>
-                    <th scope="col">نام خانوادگی</th>
-                    <th scope="col">ایمیل</th>
-                    <th scope="col">شماره تلفن</th>
-                    <th scope="col">موضوع</th>
-                    <th scope="col">ویرایش</th>
+                    <th scope="col">{% trans "First name" %}</th>
+                    <th scope="col">{% trans "Last name" %}</th>
+                    <th scope="col">{% trans "Email" %}</th>
+                    <th scope="col">{% trans "Phone number" %}</th>
+                    <th scope="col">{% trans "Subject" %}</th>
+                    <th scope="col">{% trans "Edit" %}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -94,7 +95,7 @@
               <li class="page-item"><button class="page-link" href="?page={{ page_obj.next_page_number }}" onclick="changePage(`{{page_obj.next_page_number}}`)">{{ page_obj.next_page_number }}</button></li>
               {% endif %}
               {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
-              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+              <li class="page-item disabled"><a class="page-link" href="#">{% trans "..." %}</a></li>
               {% endif %}
               <li class="page-item"><button class="page-link" href="?page={{page_obj.paginator.num_pages}}" onclick="changePage(`{{page_obj.paginator.num_pages}}`)">{{page_obj.paginator.num_pages}}</button></li>
               <li class="page-item">

@@ -1,22 +1,23 @@
 {% extends 'dashboard/customer/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 <!-- Card -->
 <div class="card">
     <!-- Header -->
     <div class="card-header border-bottom">
-        <h5 class="card-header-title">اطلاعات من</h5>
+        <h5 class="card-header-title">{% trans "My information" %}</h5>
     </div>
     <!-- End Header -->
 
     <div class="container mt-5">
-        <!-- <h1 class="mb-4 text-center">اطلاعات من</h1> -->
+        <!-- <h1 class="mb-4 text-center">My information</h1> -->
         <div class="row">
             <div class="col-md-6 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">ایمیل</h5>
+                        <h5 class="card-title">{% trans "Email" %}</h5>
                         <p class="card-text">{{user_info.email}}</p>
                     </div>
                 </div>
@@ -24,7 +25,7 @@
             <div class="col-md-6 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">نام و نام خانوادگی</h5>
+                        <h5 class="card-title">{% trans "Full name" %}</h5>
                         <p class="card-text">{{user_info.user_profile.get_fullname}}</p>
                     </div>
                 </div>
@@ -32,7 +33,7 @@
             <div class="col-md-6 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">شماره تلفن</h5>
+                        <h5 class="card-title">{% trans "Phone number" %}</h5>
                         <p class="card-text">{{user_info.user_profile.phone_number}}</p>
                     </div>
                 </div>
@@ -40,8 +41,8 @@
             <div class="col-md-6 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">نوع کاربر</h5>
-                        <p class="card-text">مشتری</p>
+                        <h5 class="card-title">{% trans "User type" %}</h5>
+                        <p class="card-text">{% trans "Customer" %}</p>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,12 @@
 {% extends "dashboard/admin/base.html" %}
 {% load static %}
 {% load humanize %}
+{% load i18n %}
 {% block content %}
 <div class="card">
     <!-- Header -->
     <div class="card-header border-bottom">
-      <h5 class="card-header-title">لیست سفارشات</h5>
+      <h5 class="card-header-title">{% trans "Order list" %}</h5>
     </div>
     <!-- End Header -->
 
@@ -19,11 +20,11 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">شماره سفارش</th>
-                <th scope="col">سفارش دهنده</th>
-                <th scope="col">قیمت کل</th>
-                <th scope="col">تاریخ ثبت</th>
-                <th scope="col">وضعیت</th>
+                <th scope="col">{% trans "Order number" %}</th>
+                <th scope="col">{% trans "Customer" %}</th>
+                <th scope="col">{% trans "Total price" %}</th>
+                <th scope="col">{% trans "Created date" %}</th>
+                <th scope="col">{% trans "Status" %}</th>
                 
               </tr>
             </thead>
@@ -75,7 +76,7 @@
             <li class="page-item"><button class="page-link" href="?page={{ page_obj.next_page_number }}" onclick="changePage(`{{page_obj.next_page_number}}`)">{{ page_obj.next_page_number }}</button></li>
             {% endif %}
             {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
-            <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+            <li class="page-item disabled"><a class="page-link" href="#">{% trans "..." %}</a></li>
             {% endif %}
             <li class="page-item"><button class="page-link" href="?page={{page_obj.paginator.num_pages}}" onclick="changePage(`{{page_obj.paginator.num_pages}}`)">{{page_obj.paginator.num_pages}}</button></li>
             <li class="page-item">

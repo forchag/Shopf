@@ -1,8 +1,9 @@
 {% load static %}
 {% load humanize %}
+{% load i18n %}
 
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="rtl">
 
 <head>
   <!-- Required Meta Tags Always Come First -->
@@ -10,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Title -->
-  <title>فاکتور</title>
+  <title>{% trans "Invoice" %}</title>
 
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -37,7 +38,7 @@
 
               <div class="col-sm-auto  text-right mb-3">
                 <div class="mb-3">
-                  <h2> فاکتور شماره</h2>
+                  <h2> {% trans "Invoice number" %}</h2>
                   <span class="d-block">#{{order.id}}</span>
                 </div>
 
@@ -49,7 +50,7 @@
                   <img class="avatar" src="{% static 'svg/logos/logo-short.svg' %}" alt="Logo">
                 </div>
 
-                <h1 class="h2 text-primary">Front Inc.</h1>
+                <h1 class="h2 text-primary">{% trans "Front Inc." %}</h1>
               </div>
               <!-- End Col -->
 
@@ -59,11 +60,11 @@
             <div class="row justify-content-md-between mb-3">
               <div class="col-md">
                 <dl class="row">
-                  <dt class="col-sm-8">نام سفارش دهنده:</dt>
+                  <dt class="col-sm-8">{% trans "Customer name:" %}</dt>
                   <dd class="col-sm-4">{{order.user.user_profile.get_fullname}}</dd>
                 </dl>
                 <dl>
-                  <dt class="col-sm-8">آدرس:</dt>
+                  <dt class="col-sm-8">{% trans "Address:" %}</dt>
                   <address>
                     {{order.get_fulladdress}}
                   </address>
@@ -74,9 +75,9 @@
 
               <div class="col-md text-md-end">
                 <dl class="row">
-                  <dt class="col-sm-8">زمان سفارش:</dt>
+                  <dt class="col-sm-8">{% trans "Order date:" %}</dt>
                   <dd class="col-sm-4">{{order.created_date|date:'Y-m-d'}}</dd>
-                  <dt class="col-sm-8">وضعیت سفارش:</dt>
+                  <dt class="col-sm-8">{% trans "Order status:" %}</dt>
                   <dd class="col-sm-4">{{order.get_status.label}}</dd>
                 </dl>
               </div>
@@ -89,9 +90,9 @@
               <table class="table table-borderless table-nowrap table-align-middle">
                 <thead class="thead-light">
                   <tr>
-                    <th>کالا</th>
-                    <th>تعداد</th>
-                    <th class="table-text-end">قیمت</th>
+                    <th>{% trans "Item" %}</th>
+                    <th>{% trans "Quantity" %}</th>
+                    <th class="table-text-end">{% trans "Price" %}</th>
                   </tr>
                 </thead>
 
@@ -101,7 +102,7 @@
                     <th>{{product.product.title}}</th>
                     <td>{{product.quantity}}</td>
 
-                    <td class="table-text-end">{{product.product.offer}} تومان</td>
+                    <td class="table-text-end">{{product.product.offer}} {% trans "Toman" %}</td>
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -114,8 +115,8 @@
             <div class="row mb-3">
 
               <div class="row mb-3">
-                <dt class="col-md-3">قیمت نهایی:</dt>
-                <dl class="col-md-3">{{order.get_totalprice|intcomma}} تومان</dl>
+                <dt class="col-md-3">{% trans "Final price:" %}</dt>
+                <dl class="col-md-3">{{order.get_totalprice|intcomma}} {% trans "Toman" %}</dl>
               </div>
               <!-- End Row -->
 
@@ -130,7 +131,7 @@
         <!-- Footer -->
         <div class="d-flex justify-content-end d-print-none gap-3">
           <a class="btn btn-primary" href="javascript:;" onclick="window.print(); return false;">
-            <i class="bi-printer me-1"></i> Print details
+            <i class="bi-printer me-1"></i> {% trans "Print details" %}
           </a>
         </div>
         <!-- End Footer -->

@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!-- Navbar -->
  <div class="navbar-expand-lg navbar-light">
     <div id="sidebarNav" class="collapse navbar-collapse navbar-vertical">
@@ -18,75 +19,75 @@
               <h4 class="card-title mb-0">{{request.user.user_profile.get_fullname}}</h4>
               <p class="card-text small">{{request.user.email}}</p>
               <br>
-              <button type="submit" class="btn btn-primary">ذخیره پروفایل</button>
+              <button type="submit" class="btn btn-primary">{% trans "Save profile" %}</button>
             </form>
           </div>
           <!-- End Avatar -->
 
           <!-- Nav -->
-          <span class="text-cap">حساب</span>
+          <span class="text-cap">{% trans "Account" %}</span>
 
           <!-- List -->
           <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
             <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard:admin:home' %}">
-                <i class="bi-person-badge nav-icon"></i>داشبورد
+                <i class="bi-person-badge nav-icon"></i> {% trans "Dashboard" %}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard:admin:change-pass' %}">
-                <i class="bi-shield-shaded nav-icon"></i> امنیت
+                <i class="bi-shield-shaded nav-icon"></i> {% trans "Security" %}
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard:admin:profile' %}">
-                <i class="bi-sliders nav-icon"></i> تنظیمات پروفایل
+                <i class="bi-sliders nav-icon"></i> {% trans "Profile settings" %}
               </a>
             </li>
           </ul>
           <!-- End List -->
 
-          <span class="text-cap">فروشگاه</span>
+          <span class="text-cap">{% trans "Store" %}</span>
 
           <!-- List -->
           <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
             <li class="nav-item">
               <a class="nav-link " href="{% url 'dashboard:admin:show-prod' %}">
-                <i class="bi-shop-window nav-icon"></i> محصولات
+                <i class="bi-shop-window nav-icon"></i> {% trans "Products" %}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{% url 'dashboard:admin:orders-list' %}">
-                <i class="bi-receipt-cutoff nav-icon"></i> سفارشات
+                <i class="bi-receipt-cutoff nav-icon"></i> {% trans "Orders" %}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{% url 'dashboard:admin:coupon-list' %}">                
-                <i class="bi-ticket-perforated nav-icon"></i> کد تخفیف
+                <i class="bi-ticket-perforated nav-icon"></i> {% trans "Discount code" %}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{% url 'dashboard:admin:ticket-list' %}">
-                <i class="bi-envelope nav-icon"></i> تیکت ها
+                <i class="bi-envelope nav-icon"></i> {% trans "Tickets" %}
               </a>
             </li>
 
 
           </ul>
 
-          <span class="text-cap">کاربران</span>
+          <span class="text-cap">{% trans "Users" %}</span>
 
           <!-- List -->
           <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
             <li class="nav-item">
               <a class="nav-link " href="{% url 'dashboard:admin:member-list' %}">
-                <i class="bi-person nav-icon"></i> لیست کاربران
+                <i class="bi-person nav-icon"></i> {% trans "User list" %}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="#">
-                <i class="bi-newspaper nav-icon"></i> خبرنامه
+                <i class="bi-newspaper nav-icon"></i> {% trans "Newsletter" %}
               </a>
             </li>
 
@@ -101,7 +102,7 @@
             <ul class="nav nav-sm nav-tabs nav-vertical">
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  <i class="bi-box-arrow-right nav-icon"></i> خروج
+                  <i class="bi-box-arrow-right nav-icon"></i> {% trans "Log out" %}
                 </a>
               </li>
             </ul>

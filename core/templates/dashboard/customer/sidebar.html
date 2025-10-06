@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!-- Navbar -->
  <div class="navbar-expand-lg navbar-light">
     <div id="sidebarNav" class="collapse navbar-collapse navbar-vertical">
@@ -18,53 +19,53 @@
               <h4 class="card-title mb-0">{{request.user.user_profile.get_fullname}}</h4>
               <p class="card-text small">{{request.user.email}}</p>
               <br>
-              <button type="submit" class="btn btn-primary">ذخیره پروفایل</button>
+              <button type="submit" class="btn btn-primary">{% trans "Save profile" %}</button>
             </form>
           </div>
           <!-- End Avatar -->
 
           <!-- Nav -->
-          <span class="text-cap">حساب</span>
+          <span class="text-cap">{% trans "Account" %}</span>
 
           <!-- List -->
           <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
             <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard:customer:home' %}">
-                <i class="bi-person-badge nav-icon"></i>داشبورد
+                <i class="bi-person-badge nav-icon"></i> {% trans "Dashboard" %}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard:customer:change-pass' %}">
-                <i class="bi-shield-shaded nav-icon"></i> امنیت
+                <i class="bi-shield-shaded nav-icon"></i> {% trans "Security" %}
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard:customer:profile' %}">
-                <i class="bi-sliders nav-icon"></i> تنظیمات پروفایل
+                <i class="bi-sliders nav-icon"></i> {% trans "Profile settings" %}
               </a>
             </li>
           </ul>
           <!-- End List -->
 
-          <span class="text-cap">خريد كردن</span>
+          <span class="text-cap">{% trans "Shopping" %}</span>
 
           <!-- List -->
           <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
             <li class="nav-item">
               <a class="nav-link " href="{% url 'dashboard:customer:order-list' %}">
-                <i class="bi-basket nav-icon"></i> سفارشات شما
+                <i class="bi-basket nav-icon"></i> {% trans "Your orders" %}
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="{% url 'dashboard:customer:wishlist' %}">
-                <i class="bi-heart nav-icon"></i>لیست علایق
+                <i class="bi-heart nav-icon"></i> {% trans "Wishlist" %}
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link " href="{% url 'dashboard:customer:addresses' %}">
-                <i class="bi-geo-alt nav-icon"></i> نشانی
+                <i class="bi-geo-alt nav-icon"></i> {% trans "Addresses" %}
               </a>
             </li>
 
@@ -81,7 +82,7 @@
             <ul class="nav nav-sm nav-tabs nav-vertical">
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  <i class="bi-box-arrow-right nav-icon"></i> خروج
+                  <i class="bi-box-arrow-right nav-icon"></i> {% trans "Log out" %}
                 </a>
               </li>
             </ul>

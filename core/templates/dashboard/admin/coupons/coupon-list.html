@@ -1,5 +1,6 @@
 {% extends "dashboard/admin/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
     <!-- Card -->
@@ -7,8 +8,8 @@
         <!-- Header -->
         <div class="card-header border-bottom">
           <div class="d-flex justify-content-between align-items-center">
-            <h5 class="">لیست تخفیف ها</h5>
-            <a class="btn btn-primary" href="{% url 'dashboard:admin:coupon-create' %}">اضافه کردن</a>
+            <h5 class="">{% trans "Discount list" %}</h5>
+            <a class="btn btn-primary" href="{% url 'dashboard:admin:coupon-create' %}">{% trans "Add" %}</a>
           </div>
         </div>
         <!-- End Header -->
@@ -20,21 +21,21 @@
 
               <!-- Input Card -->
               <div class="col-md-5 py-1">
-                <input type="text" class="form-control" placeholder="جستجوی" aria-label="جستجوی ایمیل" name="q" id="search-query-filter">
+                <input type="text" class="form-control" placeholder="{% trans 'Search' %}" aria-label="{% trans 'Search email' %}" name="q" id="search-query-filter">
 
               </div>
               <!-- End Input Card -->
               <div class="col-md-3 py-1">
                 <select class="form-select" name="order_by" id="order-by-filter">
-                  <option value="-created_date">جدیدترین</option>
-                  <option value="created_date">قدیمی ترین</option>
+                  <option value="-created_date">{% trans "Newest" %}</option>
+                  <option value="created_date">{% trans "Oldest" %}</option>
                 </select>
               </div>
               <div class="col-md-3 py-1">
                 <select class="form-select" name="category_id" id="category-id-filter">
-                    <option value="" selected>انتخاب دسته بندی</option>
-                    <option value="1">فعال</option>
-                    <option value="2">غیر فعال</option>
+                    <option value="" selected>{% trans "Select category" %}</option>
+                    <option value="1">{% trans "Active" %}</option>
+                    <option value="2">{% trans "Inactive" %}</option>
                 </select>
               </div>
               <div class="col-md-1 py-1">
@@ -51,11 +52,11 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">کد تخفیف</th>
-                    <th scope="col">درصد تخفیف</th>
-                    <th scope="col">محدودیت استفاده</th>
-                    <th scope="col">استفاده شده</th>
-                    <th scope="col">وضعیت</th>
+                    <th scope="col">{% trans "Discount code" %}</th>
+                    <th scope="col">{% trans "Discount percentage" %}</th>
+                    <th scope="col">{% trans "Usage limit" %}</th>
+                    <th scope="col">{% trans "Used" %}</th>
+                    <th scope="col">{% trans "Status" %}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -64,9 +65,9 @@
                     <th scope="row">{{forloop.counter}}</th>
                     <td>{{coupon.code}}</td>
                     <td>{{coupon.discount_percent}}%</td>
-                    <td>{{coupon.max_limit_usage}} نفر</td>
-                    <td>{{coupon.used_by.count}} نفر</td>
-                    <td>{% if coupon.max_limit_usage != coupon.used_by.count %}<span class="badge bg-success">فعال</span>{% else %}<span class="badge bg-danger">غیر فعال</span>{% endif %}</td>
+                    <td>{% blocktrans with limit=coupon.max_limit_usage %}{{ limit }} users{% endblocktrans %}</td>
+                    <td>{% blocktrans with used=coupon.used_by.count %}{{ used }} users{% endblocktrans %}</td>
+                    <td>{% if coupon.max_limit_usage != coupon.used_by.count %}<span class="badge bg-success">{% trans "Active" %}</span>{% else %}<span class="badge bg-danger">{% trans "Inactive" %}</span>{% endif %}</td>
                     
                    
                   </tr>
@@ -99,7 +100,7 @@
               <li class="page-item"><button class="page-link" href="?page={{ page_obj.next_page_number }}" onclick="changePage(`{{page_obj.next_page_number}}`)">{{ page_obj.next_page_number }}</button></li>
               {% endif %}
               {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
-              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+              <li class="page-item disabled"><a class="page-link" href="#">{% trans "..." %}</a></li>
               {% endif %}
               <li class="page-item"><button class="page-link" href="?page={{page_obj.paginator.num_pages}}" onclick="changePage(`{{page_obj.paginator.num_pages}}`)">{{page_obj.paginator.num_pages}}</button></li>
               <li class="page-item">

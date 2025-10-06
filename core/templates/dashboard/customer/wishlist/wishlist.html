@@ -1,11 +1,18 @@
 {% extends 'dashboard/customer/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 <div class="card">
     <div class="card-header d-sm-flex justify-content-sm-between align-items-sm-center border-bottom">
-      <h5 class="card-header-title">لیست علاقه مندی ها</h5>
-      <span>{{ wish_number }} مورد</span>
+      <h5 class="card-header-title">{% trans "Wishlist" %}</h5>
+      <span>
+        {% blocktrans count wish_count=wish_number %}
+          {{ wish_count }} item
+        {% plural %}
+          {{ wish_count }} items
+        {% endblocktrans %}
+      </span>
     </div>
 
     <!-- Body -->
@@ -30,12 +37,12 @@
                   <div class="d-grid gap-1">
 
                     <div class="text-body">
-                        <span class="small">دسته بندی:</span>
+                        <span class="small">{% trans "Category:" %}</span>
                         <span class="fw-semibold small">
                             {% for cat in wish.product.category.all %}
                             <a class="link-sm link-secondary" href="#">{{cat}}</a>
                             {% if not forloop.last %}
-                            ،
+                            ,
                             {% endif %}
                             {% endfor %}
                         </span>
@@ -50,7 +57,7 @@
                     <form action="{% url 'dashboard:customer:delete-wish' pk=wish.pk %}" method="post">
                         {% csrf_token %}
                         <button class="btn btn-outline-danger btn-sm"  type="submit">
-                            <i class="bi-trash me-1"></i> حذف
+                            <i class="bi-trash me-1"></i> {% trans "Remove" %}
                         </button>
                     </form>
                     </div>
@@ -93,7 +100,7 @@
         <li class="page-item"><button class="page-link" href="?page={{ page_obj.next_page_number }}" onclick="changePage(`{{page_obj.next_page_number}}`)">{{ page_obj.next_page_number }}</button></li>
         {% endif %}
         {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
-        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+        <li class="page-item disabled"><a class="page-link" href="#">{% trans "..." %}</a></li>
         {% endif %}
         <li class="page-item"><button class="page-link" href="?page={{page_obj.paginator.num_pages}}" onclick="changePage(`{{page_obj.paginator.num_pages}}`)">{{page_obj.paginator.num_pages}}</button></li>
         <li class="page-item">
@@ -108,6 +115,6 @@
     </nav>
     <!-- End Pagination -->
 
-    <a class="card-footer card-link text-center border-top" href="{% url 'shop:list_grid' %}">به خرید ادامه دهید</a>
+    <a class="card-footer card-link text-center border-top" href="{% url 'shop:list_grid' %}">{% trans "Continue shopping" %}</a>
   </div>
 {% endblock content %}
