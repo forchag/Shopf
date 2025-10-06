@@ -1,6 +1,7 @@
 {% extends "dashboard/admin/base.html" %}
 {% load static %}
 {% load humanize %}
+{% load i18n %}
 
 {% block content %}
     <!-- Card -->
@@ -8,8 +9,8 @@
         <!-- Header -->
         <div class="card-header border-bottom">
           <div class="d-flex justify-content-between align-items-center">
-            <h5 class="">لیست محصولات</h5>
-            <a class="btn btn-primary" href="{% url 'dashboard:admin:create-prod' %}">اضافه کردن</a>
+            <h5 class="">{% trans "Product list" %}</h5>
+            <a class="btn btn-primary" href="{% url 'dashboard:admin:create-prod' %}">{% trans "Add" %}</a>
           </div>
         </div>
         <!-- End Header -->
@@ -21,19 +22,19 @@
 
               <!-- Input Card -->
               <div class="col-md-5 py-1">
-                <input type="text" class="form-control" placeholder="جستجوی" aria-label="جستجوی ایمیل" name="q" id="search-query-filter">
+                <input type="text" class="form-control" placeholder="{% trans 'Search' %}" aria-label="{% trans 'Search email' %}" name="q" id="search-query-filter">
 
               </div>
               <!-- End Input Card -->
               <div class="col-md-3 py-1">
                 <select class="form-select" name="order_by" id="order-by-filter">
-                  <option value="-created_date">جدیدترین</option>
-                  <option value="created_date">قدیمی ترین</option>
+                  <option value="-created_date">{% trans "Newest" %}</option>
+                  <option value="created_date">{% trans "Oldest" %}</option>
                 </select>
               </div>
               <div class="col-md-3 py-1">
                 <select class="form-select" name="category_id" id="category-id-filter">
-                    <option value="" selected>انتخاب دسته بندی</option>
+                    <option value="" selected>{% trans "Select category" %}</option>
                     {% for category in categories %}
                     <option value="{{category.id}}">{{category.title}}</option>
                     {% endfor %}
@@ -53,13 +54,13 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">نام محصول</th>
-                    <th scope="col">دسته بندی</th>
-                    <th scope="col">قیمت</th>
-                    <th scope="col">تعداد</th>
-                    <th scope="col">وضعیت</th>
-                    <th scope="col">تخفیف</th>
-                    <th scope="col">عملیات</th>
+                    <th scope="col">{% trans "Product name" %}</th>
+                    <th scope="col">{% trans "Category" %}</th>
+                    <th scope="col">{% trans "Price" %}</th>
+                    <th scope="col">{% trans "Quantity" %}</th>
+                    <th scope="col">{% trans "Status" %}</th>
+                    <th scope="col">{% trans "Discount" %}</th>
+                    <th scope="col">{% trans "Actions" %}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -70,7 +71,7 @@
                     <td>{% for cat in object.category.all %}{{cat.title}}{% if not forloop.last %},{% endif %}{% endfor %}</td>
                     <td>{{object.price|intcomma}}</td>
                     <td>{{object.stock}}</td>
-                    <td>{% if object.is_published %}<span class="badge bg-success">نشر شده</span>{% else %}<span class="badge bg-danger">زخیره شده</span>{% endif %}</td>
+                    <td>{% if object.is_published %}<span class="badge bg-success">{% trans "Published" %}</span>{% else %}<span class="badge bg-danger">{% trans "Saved" %}</span>{% endif %}</td>
                     <td>{{object.discount_percent}}%</td>
                     <td>
                       <a class="btn btn-sm btn-icon btn-ghost-secondary" href="{% url 'dashboard:admin:edit-prod' pk=object.id %}"><i class="bi-pencil-square"></i></a>
@@ -106,7 +107,7 @@
               <li class="page-item"><button class="page-link" href="?page={{ page_obj.next_page_number }}" onclick="changePage(`{{page_obj.next_page_number}}`)">{{ page_obj.next_page_number }}</button></li>
               {% endif %}
               {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
-              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+              <li class="page-item disabled"><a class="page-link" href="#">{% trans "..." %}</a></li>
               {% endif %}
               <li class="page-item"><button class="page-link" href="?page={{page_obj.paginator.num_pages}}" onclick="changePage(`{{page_obj.paginator.num_pages}}`)">{{page_obj.paginator.num_pages}}</button></li>
               <li class="page-item">

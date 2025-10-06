@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
   
@@ -10,11 +11,11 @@
       </div>
 
       <div class="mb-5">
-        <h1 class="h2">سبد خرید شما در حال حاضر خالی است</h1>
-        <p>قبل از شروع تسویه حساب، باید محصولاتی را به سبد خرید خود اضافه کنید. در صفحه "فروشگاه" ما محصولات جالب زیادی پیدا خواهید کرد.</p>
+        <h1 class="h2">{% trans "Your shopping cart is currently empty" %}</h1>
+        <p>{% trans "Before proceeding to checkout, you need to add some products to your cart. You will find lots of interesting products on our \"Shop\" page." %}</p>
       </div>
 
-      <a class="btn btn-primary btn-transition rounded-pill px-6" href="{% url 'shop:list_grid' %}">شروع به خرید کنید</a>
+      <a class="btn btn-primary btn-transition rounded-pill px-6" href="{% url 'shop:list_grid' %}">{% trans "Start shopping" %}</a>
     </div>
   </div>
 

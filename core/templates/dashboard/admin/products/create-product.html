@@ -1,11 +1,12 @@
 {% extends "dashboard/admin/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 <div class="card">
     <!-- Header -->
     <div class="card-header border-bottom">
-      <h5 class="card-header-title">ویرایش/ساخت محصول</h5>
+      <h5 class="card-header-title">{% trans "Edit/Create product" %}</h5>
     </div>
     <!-- End Header -->
 
@@ -15,51 +16,51 @@
         {% csrf_token %}
         <div class="row d-flex ">
           <div class="col-md-6 mb-3">
-            <label >نام محصول</label>
+            <label >{% trans "Product name" %}</label>
             {{form.title}}
           </div>
           <div class="col-md-6 mb-3">
-            <label>اسلاگ محصول</label>
+            <label>{% trans "Product slug" %}</label>
             {{form.slug}}
           </div>
           <div class="col-md-6 mb-3">
-            <label>تعداد</label>
+            <label>{% trans "Quantity" %}</label>
             {{form.stock}}
           </div>
 
           <div class="col-md-6 mb-3">
-            <label>وضعیت</label>
+            <label>{% trans "Status" %}</label>
             {{form.status}}
           </div>
           <div class="col-md-6 mb-3">
-            <label for="cat-id">دسته بندی</label>
+            <label for="cat-id">{% trans "Category" %}</label>
             <br>
             {{form.category}}
         </div>
           <div class="col-md-4 mb-3">
-            <label>قیمت</label>
+            <label>{% trans "Price" %}</label>
             {{form.price}}
           </div>
           <div class="col-md-2 mb-3">
-            <label>درصد تخفیف</label>
+            <label>{% trans "Discount percentage" %}</label>
             {{form.discount_percent}}
           </div>
 
           <div class="col-md-12 mb-3">
-            <label>توضیحات</label>
+            <label>{% trans "Description" %}</label>
             {{ form.media }}
             {{form.description}}
           </div>
 
 
           <div class="col-md-12 mb-3">
-            <label>تصویر محصول</label>
+            <label>{% trans "Product image" %}</label>
             {{image_form.images}}
           </div>
 
           <div class=" d-flex pt-5 justify-content-end">
-            <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:show-prod' %}">بازگشت</a>
-            <button type="submit" class="btn btn-primary ms-3">ثبت محصول</button>
+            <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:show-prod' %}">{% trans "Back" %}</a>
+            <button type="submit" class="btn btn-primary ms-3">{% trans "Submit product" %}</button>
           </div>
         </div>
     </form>

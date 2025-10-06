@@ -1,11 +1,12 @@
 {% extends "dashboard/admin/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 <div class="card">
     <!-- Header -->
     <div class="card-header border-bottom">
-      <h5 class="card-header-title"> تیکت شماره 12345</h5>
+      <h5 class="card-header-title">{% blocktrans with ticket_id=ticket.id %}Ticket number {{ ticket_id }}{% endblocktrans %}</h5>
     </div>
     <!-- End Header -->
 
@@ -14,19 +15,19 @@
 
         <div class="row d-flex align-items-center">
           <div class="col-md-6 mb-3">
-            <dt>ایمیل: </dt>
+            <dt>{% trans "Email:" %} </dt>
             <dl>{{ticket.email}}</dl>
           </div>
           <div class="col-md-6 mb-3">
-            <dt>نام و نام خانوادگی: </dt>
+            <dt>{% trans "Full name:" %} </dt>
             <dl>{{ticket.name}} {{ticket.last_name}}</dl>
           </div>
           <div class="col-md-6 mb-3">
-            <dt>شماره تماس: </dt>
+            <dt>{% trans "Phone number:" %} </dt>
             <dl>{{ticket.phone_number}}</dl>
           </div>
           <div class="col-md-12 mb-3">
-            <dt>متن:</dt>
+            <dt>{% trans "Message:" %}</dt>
             <dl>
               <p>
                 {{ticket.description}}
@@ -40,8 +41,8 @@
       <div class="card-footer row pt-5 mt-5">
 
         <div class=" d-flex pt-5 justify-content-end">
-          <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:ticket-list' %}">بازگشت</a>
-          <a class="btn btn-primary ms-3" href="{% url 'dashboard:admin:ticket-delete' pk=ticket.id %}">پایان رسیدگی</a>
+          <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:ticket-list' %}">{% trans "Back" %}</a>
+          <a class="btn btn-primary ms-3" href="{% url 'dashboard:admin:ticket-delete' pk=ticket.id %}">{% trans "Close ticket" %}</a>
         </div>
 
       </div>

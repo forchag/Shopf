@@ -1,4 +1,8 @@
-{% extends "base.html" %} {% load static %} {% load humanize %} {% block content %}
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% load i18n %}
+{% block content %}
 <!-- ========== MAIN CONTENT ========== -->
   <div class="container content-space-1 content-space-lg-2">
     <div class="row">
@@ -7,8 +11,14 @@
         <div
         class="d-flex justify-content-between align-items-end border-bottom pb-3 mb-7"
         >
-        <h1 class="h3 mb-0">سبد خرید</h1>
-        <span>{{total_quantity}} عدد</span>
+        <h1 class="h3 mb-0">{% trans "Shopping Cart" %}</h1>
+        <span>
+          {% blocktrans count item_count=total_quantity %}
+            {{ item_count }} item
+          {% plural %}
+            {{ item_count }} items
+          {% endblocktrans %}
+        </span>
       </div>
       <!-- End Heading -->
       <!-- Form -->
@@ -34,12 +44,12 @@
                     </h5>                      
                       <div class="d-grid gap-1">
                         <div class="text-body">
-                          <span class="small">دسته بندی:</span>
+                          <span class="small">{% trans "Category:" %}</span>
                           <span class="fw-semibold small">
                           {% for cat in prod.prod_obj.category.all %}
                           {{cat}}
                           {% if not forloop.last %}
-                            ،
+                            ,
                           {% endif %}
                           {% endfor %}</span>
                         </div>
@@ -67,7 +77,7 @@
                         <div class="col-auto ">
                           <div class="d-grid gap-2 d-flex justify-content-between">
                               <button class=" btn btn-sm btn-icon text-danger border-0 mx-1" onclick="delprod(`{{ prod.product_id }}`)">
-                                  <i class="bi-trash ms-1"></i> حذف
+                              <i class="bi-trash ms-1"></i> {% trans "Remove" %}
                               </button>
                           </div>
                       </div>
@@ -84,7 +94,7 @@
                     <span class="text-body ms-1"><del>{{prod.prod_obj.price|intcomma}}</del></span>
                     {% endif %}
                     <span class="h5 d-block mb-1">{{prod.prod_obj.offer|intcomma}}</span>
-                    <p>تومان</p>
+                    <p>{% trans "Toman" %}</p>
                     </div>
                     <!-- End Col -->
                   </div>
@@ -99,7 +109,7 @@
           
           <div class="d-sm-flex justify-content-end">
             <a class="link" href="{% url 'shop:list_grid' %}">
-              به خرید ادامه دهید <i class="bi-chevron-left small ms-1"></i>
+              {% trans "Continue shopping" %} <i class="bi-chevron-left small ms-1"></i>
             </a>
           </div>
         </form>
@@ -113,30 +123,30 @@
           <div class="card card-sm shadow-sm mb-4">
             <div class="card-body">
               <div class="border-bottom pb-4 mb-4">
-                <h3 class="card-header-title">خلاصه هزینه</h3>
+                <h3 class="card-header-title">{% trans "Order Summary" %}</h3>
               </div>
               <form>
                 <div class="d-grid gap-3 mb-4">
                   <dl class="row">
-                    <dt class="col-sm-6">مالیات</dt>
+                    <dt class="col-sm-6">{% trans "Tax" %}</dt>
                     <dd class="col-sm-12 text-sm-end mb-0">
-                      به همراه 9% در هنگام پرداخت
+                      {% trans "Additional 9% at checkout" %}
                     </dd>
                   </dl>
                   <!-- End Row -->
                   
                   <dl class="row">
-                    <dt class="col-sm-6">جمع</dt>
-                    <dd class="col-sm-12 text-sm-end mb-0">{{total_price|intcomma}} تومان</dd>
+                    <dt class="col-sm-6">{% trans "Subtotal" %}</dt>
+                    <dd class="col-sm-12 text-sm-end mb-0">{{total_price|intcomma}} {% trans "Toman" %}</dd>
                   </dl>
                   <!-- End Row -->
                 </div>
                 
                 <div class="d-grid" style="margin-bottom: 10px;">
-                  <a class="btn btn-primary btn-lg" href="{% url 'order:checkout' %}">ثبت سفارش</a>
+                  <a class="btn btn-primary btn-lg" href="{% url 'order:checkout' %}">{% trans "Place Order" %}</a>
                 </div>
                 <div class="d-grid">
-                  <button class="btn btn-danger btn-lg" onclick="clearProducts()">خالی کردن سبد خرید</button>
+                  <button class="btn btn-danger btn-lg" onclick="clearProducts()">{% trans "Empty Cart" %}</button>
                 </div>
                 
               </form>
@@ -172,8 +182,8 @@
               </div>
             </div>
             <div class="flex-grow-1 ms-2">
-              <span class="small me-1">نیاز به پشتیبانی دارید؟</span>
-              <a class="link small" href="{% url 'website:contact' %}">ارسال تیکت</a>
+              <span class="small me-1">{% trans "Need support?" %}</span>
+              <a class="link small" href="{% url 'website:contact' %}">{% trans "Submit a ticket" %}</a>
             </div>
           </div>
           <!-- End Media -->

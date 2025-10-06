@@ -1,11 +1,12 @@
 {% extends "dashboard/admin/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 <div class="card">
     <!-- Header -->
     <div class="card-header border-bottom">
-      <h5 class="card-header-title">ساخت کد تخفیف</h5>
+      <h5 class="card-header-title">{% trans "Create discount code" %}</h5>
     </div>
     <!-- End Header -->
 
@@ -15,17 +16,17 @@
         {% csrf_token %}
         <div class="form-check form-switch">
             {{form.is_active}}
-            <label class="form-check-label" for="flexSwitchCheckDefault">دسترسی کاربر به سایت ( با غیر فعال کردن این گزینه ، کاربر دیگر قادر به ورود به اکانت خود نیست )</label>
+            <label class="form-check-label" for="flexSwitchCheckDefault">{% trans "User access to the site (disabling this option prevents the user from logging into their account)" %}</label>
           </div>
           <br>
         <div class="form-check form-switch">
             {{form.is_verified}}
-            <label class="form-check-label" for="flexSwitchCheckDefault">صحت ایمیل کاربر ( در حال ساخت )</label>
+            <label class="form-check-label" for="flexSwitchCheckDefault">{% trans "User email verification (under construction)" %}</label>
           </div>
 
           <div class=" d-flex pt-5 justify-content-end">
-            <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:member-list' %}">بازگشت</a>
-            <button type="submit" class="btn btn-primary ms-3">ویرایش</button>
+            <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:member-list' %}">{% trans "Back" %}</a>
+            <button type="submit" class="btn btn-primary ms-3">{% trans "Edit" %}</button>
           </div>
         </div>
     </form>

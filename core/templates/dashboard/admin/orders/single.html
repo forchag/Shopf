@@ -1,6 +1,7 @@
 {% extends "dashboard/customer/base.html" %}
 {% load static %}
 {% load humanize %}
+{% load i18n %}
 
 {% block content %}
 
@@ -9,8 +10,8 @@
     <!-- Header -->
     <div class="card-header border-bottom">
       <div class="d-flex justify-content-between align-items-center">
-        <h5 class="">شماره سفارش : {{order.id}}</h5>
-        <a class="btn btn-primary" href="{% url 'dashboard:customer:order-invoice' pk=order.id %}" target="_blank">مشاهده فاکتور</a>
+        <h5 class="">{% blocktrans with order_id=order.id %}Order number : {{ order_id }}{% endblocktrans %}</h5>
+        <a class="btn btn-primary" href="{% url 'dashboard:customer:order-invoice' pk=order.id %}" target="_blank">{% trans "View invoice" %}</a>
       </div>
     </div>
     <!-- End Header -->
@@ -25,10 +26,10 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">تصویر</th>
-                <th scope="col">کد محصول</th>
-                <th scope="col">نام محصول</th>
-                <th scope="col">تعداد سفارش</th>
+                <th scope="col">{% trans "Image" %}</th>
+                <th scope="col">{% trans "Product code" %}</th>
+                <th scope="col">{% trans "Product name" %}</th>
+                <th scope="col">{% trans "Quantity ordered" %}</th>
               </tr>
             </thead>
             {% for product in order.order_items.all %}
@@ -42,7 +43,7 @@
                 </td>
                 <td>{{product.product.id}}</td>
                 <td>{{product.product.title}}</td>
-                <td>{{product.quantity}} عدد</td>
+                <td>{% blocktrans count quantity=product.quantity %}{{ quantity }} item{% plural %}{{ quantity }} items{% endblocktrans %}</td>
               </tr>
             </tbody>
             {% endfor %}
@@ -58,32 +59,32 @@
     <div class="card-footer row pt-5 mt-5">
       <form>
         <div class="row mb-3 align-items-center">
-          <dt class="col-md-3">سفارش دهنده:</dt>
+          <dt class="col-md-3">{% trans "Customer:" %}</dt>
           <dl class="col-md-3">{{order.user.user_profile.get_fullname}}</dl>
-          <dt class="col-md-3">وضعیت سفارش:</dt>
+          <dt class="col-md-3">{% trans "Order status:" %}</dt>
           <dl class="col-md-3 ">{{order.get_status.label}}</dl>
         </div>
         <div class="row mb-3">
-          <dt class="col-md-3"> تاریخ سفارش:</dt>
+          <dt class="col-md-3">{% trans "Order date:" %}</dt>
           <dl class="col-md-3">{{order.created_date|date:'Y-m-d h:i'}}</dl>
-          <dt class="col-md-3"> درصد تخفیف:</dt>
+          <dt class="col-md-3">{% trans "Discount percentage:" %}</dt>
           <dl class="col-md-3">{{order.coupon.discount_percent}}</dl>
         </div>
         <!-- End Row -->
         <div class="row mb-3">
-          <dt class="col-md-3"> کد پستی:</dt>
+          <dt class="col-md-3">{% trans "Postal code:" %}</dt>
           <dl class="col-md-3">{{order.address.zip_code}}</dl>
-          <dt class="col-md-3"> قیمت اصلی:</dt>
-          <dl class="col-md-3">{{order.get_totalprice|intcomma}} تومان</dl>
+          <dt class="col-md-3">{% trans "Original price:" %}</dt>
+          <dl class="col-md-3">{{order.get_totalprice|intcomma}} {% trans "Toman" %}</dl>
         </div>
         <div class="row mb-3">
-          <dt class="col-md-3"> آدرس:</dt>
+          <dt class="col-md-3">{% trans "Address:" %}</dt>
           <dl class="col-md-3">{{order.get_fulladdress}}</dl>
-          <dt class="col-md-3"> قیمت با تخفیف:</dt>
-          <dl class="col-md-3">{{order.final_price|intcomma}} تومان</dl>
+          <dt class="col-md-3">{% trans "Discounted price:" %}</dt>
+          <dl class="col-md-3">{{order.final_price|intcomma}} {% trans "Toman" %}</dl>
         </div>
         <div class=" d-flex pt-5 justify-content-end">
-          <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:orders-list' %}">بازگشت</a>
+          <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:orders-list' %}">{% trans "Back" %}</a>
         </div>
       </form>
     </div>

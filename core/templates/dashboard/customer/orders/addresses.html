@@ -1,10 +1,11 @@
 {% extends "dashboard/customer/base.html" %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 <div class="card">
     <!-- Header -->
     <div class="card-header border-bottom">
-      <h5 class="card-header-title">آدرس های من</h5>
+      <h5 class="card-header-title">{% trans "My addresses" %}</h5>
     </div>
     <!-- End Header -->
 
@@ -21,8 +22,8 @@
               <span class="d-block mb-2">{{address.zip_code}}</span>
               <span class="d-block mb-2">{{address.address}}</span>
               <a class="btn btn-white btn-xs" href="{% url 'dashboard:customer:change-addresses' pk=address.pk %}">
-                <i class="bi-pencil-fill me-1"></i> آدرس را ویرایش
-                کنید
+                <i class="bi-pencil-fill me-1"></i> {% trans "Edit address" %}
+               
               </a>
             </label>
           </div>
@@ -39,7 +40,7 @@
             <div class="card-body card-dashed-body py-8">
               <img class="avatar avatar-lg avatar-4x3 mb-2" src="{% static 'svg/illustrations/oc-address.svg' %}"
                 alt="Image Description" />
-              <span class="d-block"><i class="bi-plus"></i> یک آدرس جدید اضافه کنید</span>
+              <span class="d-block"><i class="bi-plus"></i> {% trans "Add a new address" %}</span>
             </div>
           </a>
           <!-- End Card -->

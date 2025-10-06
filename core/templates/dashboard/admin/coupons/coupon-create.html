@@ -1,11 +1,12 @@
 {% extends "dashboard/admin/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 <div class="card">
     <!-- Header -->
     <div class="card-header border-bottom">
-      <h5 class="card-header-title">ساخت کد تخفیف</h5>
+      <h5 class="card-header-title">{% trans "Create discount code" %}</h5>
     </div>
     <!-- End Header -->
 
@@ -17,7 +18,7 @@
 
             <!-- Form -->
             <div class="row mb-4">
-                <label for="firstNameLabel" class="col-sm-3 col-form-label form-label">مقادیر تخفیف</label>
+                <label for="firstNameLabel" class="col-sm-3 col-form-label form-label">{% trans "Discount values" %}</label>
 
                 <div class="col-sm-9">
                   <div class="input-group">
@@ -29,7 +30,7 @@
               <!-- End Form -->
 
               <!-- Form -->
-                <label for="phoneLabel" class="col-sm-3 col-form-label form-label">کد تخفیف</label>
+                <label for="phoneLabel" class="col-sm-3 col-form-label form-label">{% trans "Discount code" %}</label>
 
                 <div class="col-sm-9">
                   <div class="input-group ">
@@ -43,8 +44,8 @@
           <!-- End Form -->
 
           <div class=" d-flex pt-5 justify-content-end">
-            <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:coupon-list' %}">بازگشت</a>
-            <button type="submit" class="btn btn-primary ms-3">ثبت کد</button>
+            <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:coupon-list' %}">{% trans "Back" %}</a>
+            <button type="submit" class="btn btn-primary ms-3">{% trans "Submit code" %}</button>
           </div>
         </div>
     </form>

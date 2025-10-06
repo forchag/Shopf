@@ -1,10 +1,11 @@
 {% extends "dashboard/customer/base.html" %}
 {% load static %}
+{% load i18n %}
 {% block content %}
           <!-- Card -->
           <div class="card">
             <div class="card-header border-bottom">
-              <h4 class="card-header-title">اطلاعات پایه</h4>
+              <h4 class="card-header-title">{% trans "Basic information" %}</h4>
             </div>
 
             <!-- Body -->
@@ -14,7 +15,7 @@
 
                 <!-- Form -->
                 <div class="row mb-4">
-                  <label for="firstNameLabel" class="col-sm-3 col-form-label form-label">نام و نام خانوادگی </label>
+                  <label for="firstNameLabel" class="col-sm-3 col-form-label form-label">{% trans "Full name" %} </label>
 
                   <div class="col-sm-9">
                     <div class="input-group">
@@ -31,8 +32,8 @@
                         "container": "#addPhoneFieldContainer",
                         "defaultCreated": 0
                       }'>
-                  <label for="phoneLabel" class="col-sm-3 col-form-label form-label">تلفن <span
-                      class="form-label-secondary">(اختیاری)</span></label>
+                  <label for="phoneLabel" class="col-sm-3 col-form-label form-label">{% trans "Phone" %} <span
+                      class="form-label-secondary">{% trans "(Optional)" %}</span></label>
 
                   <div class="col-sm-9">
                     <div class="input-group">
@@ -46,7 +47,7 @@
             <!-- End Form -->
             <!-- Footer -->
               <div class="d-flex justify-content-end gap-3">
-                <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+                <button type="submit" class="btn btn-primary">{% trans "Save changes" %}</button>
               </div>
             <!-- End Footer -->
               </form>

@@ -1,6 +1,7 @@
 {% extends "dashboard/customer/base.html" %}
 {% load static %}
 {% load humanize %}
+{% load i18n %}
 
 {% block content %}
 
@@ -17,7 +18,13 @@
           <!-- Select Group -->
           <div class="d-sm-flex align-items-sm-center mb-5">
             <div class="mb-2 mb-sm-0 me-3">
-              <strong class="text-dark">{{orders_counter}} سفارش</strong>
+              <strong class="text-dark">
+                {% blocktrans count order_count=orders_counter %}
+                  {{ order_count }} order
+                {% plural %}
+                  {{ order_count }} orders
+                {% endblocktrans %}
+              </strong>
             </div>
           </div>
           <!-- End Select Group -->
@@ -30,25 +37,25 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-6 col-md mb-3 mb-md-0">
-                    <small class="card-subtitle mb-0">جمع</small>
-                    <small class="text-dark fw-semibold">{{order.final_price|intcomma}} تومان</small>
+                    <small class="card-subtitle mb-0">{% trans "Total" %}</small>
+                    <small class="text-dark fw-semibold">{{order.final_price|intcomma}} {% trans "Toman" %}</small>
                   </div>
                   <!-- End Col -->
 
                   <div class="col-6 col-md mb-3 mb-md-0">
-                    <small class="card-subtitle mb-0">وضعیت </small>
+                    <small class="card-subtitle mb-0">{% trans "Status" %} </small>
                     <small class="text-dark fw-semibold">{{order.get_status.label}}</small>
                   </div>
                   <!-- End Col -->
 
                   <div class="col-6 col-md">
-                    <small class="card-subtitle mb-0">شماره سفارش</small>
+                    <small class="card-subtitle mb-0">{% trans "Order number" %}</small>
                     <small class="text-dark fw-semibold">{{order.id}}</small>
                   </div>
                   <!-- End Col -->
 
                   <div class="col-6 col-md">
-                    <small class="card-subtitle mb-0">زمان سفارش:</small>
+                    <small class="card-subtitle mb-0">{% trans "Order time:" %}</small>
                     <small class="text-dark fw-semibold">{{order.created_date|date:'Y-m-d h:i'}}</small>
                   </div>
                   <!-- End Col -->
@@ -73,10 +80,10 @@
                     <div class="d-grid gap-2">
                       {% if order.get_status.id == 2 %}
                       <a class="btn btn-white btn-sm" href="{% url 'dashboard:customer:order-invoice' pk=order.id %}">
-                        <i class="bi-receipt small me-2"></i> مشاهده فاکتور
+                        <i class="bi-receipt small me-2"></i> {% trans "View invoice" %}
                       </a>
                       {% endif %}
-                      <a class="btn btn-primary btn-sm" href="{% url 'dashboard:customer:order-detail' pk=order.id %}">دیدن سفارش</a>
+                      <a class="btn btn-primary btn-sm" href="{% url 'dashboard:customer:order-detail' pk=order.id %}">{% trans "View order" %}</a>
                     </div>
                   </div>
                 </div>
@@ -111,7 +118,7 @@
               <li class="page-item"><button class="page-link" href="?page={{ page_obj.next_page_number }}" onclick="changePage(`{{page_obj.next_page_number}}`)">{{ page_obj.next_page_number }}</button></li>
               {% endif %}
               {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
-              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+              <li class="page-item disabled"><a class="page-link" href="#">{% trans "..." %}</a></li>
               {% endif %}
               <li class="page-item"><button class="page-link" href="?page={{page_obj.paginator.num_pages}}" onclick="changePage(`{{page_obj.paginator.num_pages}}`)">{{page_obj.paginator.num_pages}}</button></li>
               <li class="page-item">
@@ -133,8 +140,8 @@
           <div class="text-center content-space-1">
             <img class="avatar avatar-xl mb-3" src="{% static 'svg/illustrations/empty-state-no-data.svg' %}"
               alt="Image Description">
-            <p class="card-text">هیچ داده ای برای نمایش وجود ندارد</p>
-            <a class="btn btn-white btn-sm" href="#">شروع به خرید کنید</a>
+            <p class="card-text">{% trans "There is no data to display" %}</p>
+            <a class="btn btn-white btn-sm" href="#">{% trans "Start shopping" %}</a>
           </div>
           <!-- End Empty State -->
         </div>
