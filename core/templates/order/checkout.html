@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
 {% load humanize %}
+{% load i18n %}
 {% block content %}
     <!-- Content -->
     <div class="container content-space-1 content-space-lg-2">
         <div class="row">
           <div class="col-lg-8 mb-7 mb-lg-0">
-            <h4 class="mb-3">انتخاب آدرس</h4>
+            <h4 class="mb-3">{% trans "Select address" %}</h4>
              <!-- Form -->
           <form action="." method="post" id="checkout">
             {% csrf_token %}
@@ -23,7 +24,7 @@
                 <!-- End Check -->
                 {% endfor %}
                 <div>
-                  <a href="{% url 'dashboard:customer:addresses' %}">مدیریت آدرس ها</a>
+                  <a href="{% url 'dashboard:customer:addresses' %}">{% trans "Manage addresses" %}</a>
                 </div>
               </div>
   
@@ -35,7 +36,7 @@
   
                 <div class="col-sm text-center text-sm-start">
                   <a class="link" href="{% url 'cart:cart-summery' %}">
-                    <i class="bi-chevron-left small ms-1"></i> بازگشت به سبد خرید
+                    <i class="bi-chevron-left small ms-1"></i> {% trans "Back to cart" %}
                   </a>
                 </div>
                 <!-- End Col -->
@@ -52,12 +53,12 @@
               <div class="card card-sm shadow-sm mb-4">
                 <div class="card-body">
                   <div class="border-bottom pb-4 mb-4">
-                    <h3 class="card-header-title">خلاصه سفارش</h3>
+                    <h3 class="card-header-title">{% trans "Order summary" %}</h3>
                   </div>
                     <div class="input-group border-bottom pb-4 mb-3 ">
-                      <input form="checkout" type="text" class="form-control text-center" name="coupon_code" placeholder="کد تخفیف"
-                      aria-label="کد تخفیف" id="coupon-check">
-                      <button class="btn btn-primary" type="button" onclick="validateCoupon()"> بررسی</button>
+                      <input form="checkout" type="text" class="form-control text-center" name="coupon_code" placeholder="{% trans "Discount code" %}"
+                      aria-label="{% trans "Discount code" %}" id="coupon-check">
+                      <button class="btn btn-primary" type="button" onclick="validateCoupon()"> {% trans "Validate" %}</button>
                     </div>
   
                     <div class="border-bottom pb-4 mb-4">
@@ -67,26 +68,26 @@
                       <!-- End Row -->
   
                       <dl class="row">
-                        <dt class="col-sm-6">محاسبه قیمت</dt>
+                        <dt class="col-sm-6">{% trans "Price calculation" %}</dt>
                         <dd class="col-sm-10 text-sm-end mb-0" id="priceDetails">
-                          <span>قیمت کل : {{total_price|intcomma}} تومان</span>
+                          <span>{% blocktrans %}Total price: {{ total_price|intcomma }} Toman{% endblocktrans %}</span>
                           <br>
-                          <span>9% مالیات : {{tax_price|intcomma}} تومان</span>
+                          <span>{% blocktrans %}9% tax: {{ tax_price|intcomma }} Toman{% endblocktrans %}</span>
                           <br>
                         </dd>
                       </dl>
                       <!-- End Row -->
                       <dl class="row">
-                        <dt class="col-sm-6">جمع کل</dt>
+                        <dt class="col-sm-6">{% trans "Grand total" %}</dt>
                         <dd class="col-sm-10 text-sm-end mb-0">
-                          <span id="final-price">{{final_price|intcomma}}</span> تومان
+                          <span id="final-price">{{final_price|intcomma}}</span> {% trans "Toman" %}
                         </dd>
                       </dl>
                       <!-- End Row -->
                     </div>
   
                     <div class="d-grid">
-                      <button form="checkout" type="submit" class="btn btn-primary btn-lg">ثبت نهایی</button>
+                      <button form="checkout" type="submit" class="btn btn-primary btn-lg">{% trans "Submit order" %}</button>
                     </div>
                 </div>
                 <!-- End Card -->
@@ -108,8 +109,8 @@
                   </div>
                 </div>
                 <div class="flex-grow-1 ms-2">
-                  <span class="small me-1">نیاز به پشتیبانی دارید؟</span>
-                  <a class="link small" href="#">ارسال تیکت</a>
+                  <span class="small me-1">{% trans "Need support?" %}</span>
+                  <a class="link small" href="#">{% trans "Submit a ticket" %}</a>
                 </div>
               </div>
               <!-- End Media -->
@@ -126,7 +127,7 @@
 <script>
   function discountPrice(discounted_price){
       // Create a new <span> element with jQuery
-      var discountSpan = $('<span>').text('مقدار تخفیف : ' + discounted_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' تومان');
+      var discountSpan = $('<span>').text('{{ _("Discount amount:") }} ' + discounted_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' {{ _("Toman") }}');
 
       // Find the target <dd> element
       var priceDetails = $('#priceDetails');

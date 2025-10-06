@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
       <!-- Content -->
@@ -10,11 +11,11 @@
           </div>
   
           <div class="mb-5">
-            <h1 class="h2">سفارش شما تکمیل شد!</h1>
-            <p>از سفارش شما متشکریم! سفارش شما در حال پردازش است و ظرف 3 تا 6 ساعت تکمیل خواهد شد. پس از تکمیل سفارش شما یک ایمیل تاییدیه دریافت خواهید کرد.</p>
+            <h1 class="h2">{% trans "Your order is complete!" %}</h1>
+            <p>{% trans "Thank you for your order! Your order is being processed and will be completed within 3 to 6 hours. You will receive a confirmation email once it is finished." %}</p>
           </div>
-  
-          <a class="btn btn-primary btn-transition rounded-pill px-6" href="{% url 'shop:list_grid' %}">به خرید ادامه دهید</a>
+
+          <a class="btn btn-primary btn-transition rounded-pill px-6" href="{% url 'shop:list_grid' %}">{% trans "Continue shopping" %}</a>
         </div>
       </div>
       <!-- End Content -->
