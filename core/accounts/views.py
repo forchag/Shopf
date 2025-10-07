@@ -1,5 +1,7 @@
+from django.contrib import messages
 from django.contrib.auth import login, views as auth_views
 from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
 
@@ -10,7 +12,7 @@ class SignUpView(SuccessMessageMixin, CreateView):
     template_name = "accounts/signup.html"
     form_class = RegistrationForm
     success_message = _("User registration completed successfully")
-    success_url = "/"
+    success_url = reverse_lazy("website:home")
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -27,4 +29,9 @@ class LoginView(SuccessMessageMixin, auth_views.LoginView):
 
 
 class LogoutView(auth_views.LogoutView):
-    pass
+    next_page = reverse_lazy("website:home")
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            messages.success(request, _("Signed out successfully"))
+        return super().dispatch(request, *args, **kwargs)

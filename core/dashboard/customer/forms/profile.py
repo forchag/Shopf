@@ -6,7 +6,29 @@ from accounts.models import Profile
 
 
 class ChangePassForm(PasswordChangeForm):
-    pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["old_password"].widget.attrs.update(
+            {
+                "class": "form-control",
+                "placeholder": _("Enter your current password"),
+                "autocomplete": "current-password",
+            }
+        )
+        self.fields["new_password1"].widget.attrs.update(
+            {
+                "class": "form-control",
+                "placeholder": _("Enter a new password"),
+                "autocomplete": "new-password",
+            }
+        )
+        self.fields["new_password2"].widget.attrs.update(
+            {
+                "class": "form-control",
+                "placeholder": _("Confirm the new password"),
+                "autocomplete": "new-password",
+            }
+        )
 
 
 class ProfileForm(forms.ModelForm):
