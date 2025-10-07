@@ -131,32 +131,46 @@ To me : It's an usful tools for store medias in a safe and accessible place .
 
 # Setup
 
-## First step
-For setup this site and walk through it you need to have <a href='https://www.docker.com/'>docker</a> on you computer
-
-## Clone it
-Next step is cloning this project
+## 1. Clone the project
 ```bash
 git clone https://github.com/Benfoxyy/Django-Online-Shop.git
+cd Django-Online-Shop/core
 ```
 
-## Docker
-Docker is a powerful tool for run, deploying and transferring project, so i decided to use it .
-
-As i said i separet my site, so for running it on development or deployment mode, you should follow one of these section :
-
-## Development
+## 2. Create a virtual environment
 ```bash
-docker-compose up --build -d
+python -m venv .venv
+source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
 ```
-By running this command everything creat and run automaticlly, after everything is over you can oppen <a href='127.0.0.1:8000'>127.0.0.1:8000</a> on your browser to see the resault
 
-This version of website is for <b>developers</b> to testing and editting
+## 3. Install dependencies
+```bash
+pip install -r ../requirements.dev.txt
+```
 
-This version has some tools that it is not exist in [Deployment](#deployment) like :
+## 4. Configure environment variables
+Copy the sample configuration and adjust it to your needs:
+```bash
+cp .env.example .env
+```
 
-### Django Debug Toolbar
-<a href='https://pypi.org/project/django-debug-toolbar/'>django_debug_toolbar</a> is an useful library for django to get reports of every single page and manage it better
+By default the project uses SQLite, in-memory caching and local media storage so it runs out of the box. If you prefer PostgreSQL, Redis or MinIO you can enable them by editing the values in `.env`.
+
+## 5. Apply migrations and create a superuser
+```bash
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+## 6. Run the development server
+```bash
+python manage.py runserver
+```
+
+The site will be available at <http://127.0.0.1:8000>. When `DEBUG=True` the API schema, Swagger UI and Django Debug Toolbar are automatically enabled.
+
+### Optional: Docker support
+The repository still contains Docker files for anyone who prefers containerised workflows, but they are no longer required for local development.
 
 <hr>
 
