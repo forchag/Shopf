@@ -21,13 +21,13 @@ class CustomAuthenticationForm(AuthenticationForm):
     captcha = ReCaptchaField(widget=ReCaptchaV3)
 
     error_messages = {
-        "invalid_login": "ایمیل یا پسوورد اشتباه میباشد",
+        "invalid_login": _("Please enter a correct email address and password."),
         # 'inactive': "This account is inactive. Contact support for assistance.",
     }
 
     def confirm_login_allowed(self, user):
         if not user.is_verified:
-            raise forms.ValidationError("اکانت شما هنوز تایید نشده است")
+            raise forms.ValidationError(_("Your account has not been verified yet."))
 
 
 class SetPasswordForm(forms.Form):

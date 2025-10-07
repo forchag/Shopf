@@ -1,14 +1,14 @@
-{% load static %}
+{% load static i18n %}
 
 <!DOCTYPE html>
-<html lang="fa" dir="" class="h-100">
+<html lang="en" dir="ltr" class="h-100">
 <head>
   <!-- Required Meta Tags Always Come First -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Title -->
-  <title>خطای 404 | جلو - قالب چند منظوره پاسخگو</title>
+  <title>{% trans "Error 404 | Front - Responsive Multipurpose Template" %}</title>
 
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -45,11 +45,11 @@
       </div>
 
       <div class="mb-4">
-        <p class="fs-4 mb-0">اوه! به نظر می رسد لینک بدی را دنبال کرده اید.</p>
-        <p class="fs-4">اگر فکر می کنید این مشکل با ماست، لطفا <a class="link" href="#">به ما بگو</a>.</p>
+        <p class="fs-4 mb-0">{% trans "Oops! It looks like you followed a bad link." %}</p>
+        <p class="fs-4">{% trans "If you think this is an issue on our side, please" %} <a class="link" href="#">{% trans "tell us" %}</a>.</p>
       </div>
 
-      <a class="btn btn-primary" href="{% url 'website:home' %}">به خانه برگرد</a>
+      <a class="btn btn-primary" href="{% url 'website:home' %}">{% trans "Go back home" %}</a>
     </div>
     <!-- End Content -->
   </main>
@@ -60,7 +60,7 @@
     <div class="container pb-5 content-space-b-sm-1">
       <div class="row justify-content-between align-items-center">
         <div class="col-sm mb-3 mb-sm-0">
-          <p class="small mb-0">&copy; جلو. Htmlstream 2021.</p>
+          <p class="small mb-0">&copy; {% trans "Front. Htmlstream 2021." %}</p>
         </div>
 
         <div class="col-sm-auto">

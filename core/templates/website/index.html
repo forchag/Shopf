@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static i18n %}
 {% load shop_tags %}
 {% block content %}
 <!-- Hero -->
@@ -14,17 +14,14 @@
           <div class="row align-items-lg-center">
             <div class="col-lg-5 order-lg-2 mb-7 mb-lg-0">
               <div class="mb-6">
-                <h1 class="display-4 mb-4">درپوش طرح اصلی جلو</h1>
-                <p>
-                  فرانت علاوه بر اینکه در نوآوری‌های فنی بازی را تغییر می‌دهد،
-                  برخی از پرفروش‌ترین کلاه‌ها را در قفسه خود دارد.
-                </p>
+                <h1 class="display-4 mb-4">{% trans "Front classic cap" %}</h1>
+                <p>{% trans "Beyond changing the game with technical innovations, Front keeps some of the bestselling caps on its shelves." %}</p>
               </div>
 
               <div class="d-flex gap-2">
-                <a class="btn btn-primary rounded-pill" href="#"
-                  >نمایش جزئیات محصول</a
-                >
+                <a class="btn btn-primary rounded-pill" href="#">
+                  {% trans "View product details" %}
+                </a>
               </div>
             </div>
             <!-- End Col -->
@@ -53,18 +50,14 @@
           <div class="row align-items-lg-center">
             <div class="col-lg-5 order-lg-2 mb-7 mb-lg-0">
               <div class="mb-6">
-                <h2 class="display-4 mb-4">اپل آیپد پرو</h2>
-                <p>
-                  این همه جدید، تمام صفحه نمایش، و همه قدرتمند است. کاملاً
-                  بازطراحی شده و با پیشرفته‌ترین فن‌آوری ما بسته‌بندی شده است،
-                  شما را وادار می‌کند دوباره به توانایی iPad خود فکر کنید.
-                </p>
+                <h2 class="display-4 mb-4">{% trans "Apple iPad Pro" %}</h2>
+                <p>{% trans "All new, all screen, and all powerful. Completely redesigned and packed with our most advanced technology, it makes you rethink what your iPad can do." %}</p>
               </div>
 
               <div class="d-flex gap-2">
-                <a class="btn btn-primary rounded-pill" href="#"
-                  >نمایش جزئیات محصول</a
-                >
+                <a class="btn btn-primary rounded-pill" href="#">
+                  {% trans "View product details" %}
+                </a>
               </div>
             </div>
             <!-- End Col -->
@@ -93,19 +86,14 @@
           <div class="row align-items-lg-center">
             <div class="col-lg-5 order-lg-2 mb-7 mb-lg-0">
               <div class="mb-6">
-                <h3 class="display-4 mb-4">هودی سلیو</h3>
-                <p>
-                  لیبل فرانسوی Celio که در سال 1985 تأسیس شد، 30 سال تخصص را در
-                  محدوده لباس‌های مردانه معاصر خود قرار می‌دهد. با شلوارک جین،
-                  شلوار چینی و پیراهن های چاپ شده، انتظار سبک پروازی را برای یک
-                  شهر یا ساحل داشته باشید.
-                </p>
+                <h3 class="display-4 mb-4">{% trans "Sleeve hoodie" %}</h3>
+                <p>{% trans "Founded in 1985, the French label Celio brings 30 years of expertise to its modern menswear range. Pair with denim shorts, chinos, and printed shirts for city or seaside style." %}</p>
               </div>
 
               <div class="d-flex gap-2">
-                <a class="btn btn-primary rounded-pill" href="#"
-                  >نمایش جزئیات محصول</a
-                >
+                <a class="btn btn-primary rounded-pill" href="#">
+                  {% trans "View product details" %}
+                </a>
               </div>
             </div>
             <!-- End Col -->
@@ -211,8 +199,8 @@
             />
           </div>
           <div class="flex-grow-1 ms-4">
-            <h4 class="mb-1">تسویه حساب ایمن</h4>
-            <p class="small mb-0">تسویه حساب مطمئن تضمینی</p>
+            <h4 class="mb-1">{% trans "Secure checkout" %}</h4>
+            <p class="small mb-0">{% trans "Guaranteed safe payment" %}</p>
           </div>
         </div>
         <!-- End Icon Block -->
@@ -230,10 +218,8 @@
             />
           </div>
           <div class="flex-grow-1 ms-4">
-            <h4 class="mb-1">30 روز بازگشت</h4>
-            <p class="small mb-0">
-              پیشنهاد ما به شما بازپرداخت کامل ظرف 30 روز پس از خرید است.
-            </p>
+            <h4 class="mb-1">{% trans "30-day returns" %}</h4>
+            <p class="small mb-0">{% trans "Enjoy a full refund within 30 days of purchase." %}</p>
           </div>
         </div>
         <!-- End Icon Block -->
@@ -251,11 +237,8 @@
             />
           </div>
           <div class="flex-grow-1 ms-4">
-            <h4 class="mb-1">ارسال رایگان</h4>
-            <p class="small mb-0">
-              حمل و نقل استاندارد رایگان را به صورت خودکار در هر سفارش دریافت
-              کنید.
-            </p>
+            <h4 class="mb-1">{% trans "Free shipping" %}</h4>
+            <p class="small mb-0">{% trans "Automatically receive standard shipping at no extra cost on every order." %}</p>
           </div>
         </div>
         <!-- End Icon Block -->
@@ -271,7 +254,7 @@
 <div class="container content-space-2 content-space-lg-3">
   <!-- Heading -->
   <div class="w-md-75 w-lg-50 text-center mx-md-auto mb-5 mb-md-9">
-    <h2>خرید بهترین محصولات در فروشگاه</h2>
+    <h2>{% trans "Shop the best products in store" %}</h2>
   </div>
   <!-- End Heading -->
   <div class="row mb-2">
@@ -283,7 +266,7 @@
   <!-- End Row -->
 
   <div class="text-center">
-    <p class="small">فروش ویژه محصولات برای مدت زمانی محدود</p>
+    <p class="small">{% trans "Limited-time special offers on featured products" %}</p>
   </div>
 </div>
 <!-- End Card Grid -->
@@ -301,8 +284,8 @@
         "
       >
         <div class="card-body">
-          <span class="card-subtitle text-danger">فقط برای زمانی محدود</span>
-          <h2 class="card-title display-4">70% تخفیف</h2>
+          <span class="card-subtitle text-danger">{% trans "Limited time only" %}</span>
+          <h2 class="card-title display-4">{% trans "70% off" %}</h2>
 
           <div class="w-md-65">
             <!-- Countdown -->
@@ -312,7 +295,7 @@
                   <span class="js-cd-days h2"></span>
                 </div>
 
-                <h5 class="card-title">روزها</h5>
+                <h5 class="card-title">{% trans "Days" %}</h5>
               </div>
               <!-- End Col -->
 
@@ -321,7 +304,7 @@
                   <span class="js-cd-hours h2"></span>
                 </div>
 
-                <h5 class="card-title">ساعت ها</h5>
+                <h5 class="card-title">{% trans "Hours" %}</h5>
               </div>
               <!-- End Col -->
 
@@ -330,7 +313,7 @@
                   <span class="js-cd-minutes h2"></span>
                 </div>
 
-                <h5 class="card-title">دقیقه</h5>
+                <h5 class="card-title">{% trans "Minutes" %}</h5>
               </div>
               <!-- End Col -->
 
@@ -339,7 +322,7 @@
                   <span class="js-cd-seconds h2"></span>
                 </div>
 
-                <h5 class="card-title">ثانیه</h5>
+                <h5 class="card-title">{% trans "Seconds" %}</h5>
               </div>
               <!-- End Col -->
             </div>
@@ -349,7 +332,7 @@
           <a
             class="btn btn-light btn-sm btn-transition rounded-pill px-6"
             href="#"
-            >خرید کنید</a
+            >{% trans "Shop now" %}</a
           >
         </div>
       </div>
@@ -368,17 +351,14 @@
         <div class="card-body">
           <div class="mb-4">
             <h2 class="card-title text-white">$109.99</h2>
-            <h3 class="card-title text-white">دوچرخه Nakto 26</h3>
-            <p class="card-text text-white">
-              دوچرخه های NAKTO برای نجات محیط زیست و به ارمغان آوردن سرگرمی برای
-              دوستانمان!
-            </p>
+            <h3 class="card-title text-white">{% trans "Nakto 26 Bike" %}</h3>
+            <p class="card-text text-white">{% trans "NAKTO bikes are built to protect the environment and bring fun to our friends!" %}</p>
           </div>
 
           <a
             class="btn btn-light btn-sm btn-transition rounded-pill px-6"
             href="#"
-            >خرید کنید</a
+            >{% trans "Shop now" %}</a
           >
         </div>
       </div>
@@ -397,8 +377,8 @@
       <div class="row justify-content-lg-between">
         <!-- Heading -->
         <div class="mb-5">
-          <span class="text-cap">ثبت نام</span>
-          <h2>اخبار جدید را دریافت کنید</h2>
+          <span class="text-cap">{% trans "Sign up" %}</span>
+          <h2>{% trans "Get the latest news" %}</h2>
         </div>
         <!-- End Heading -->
 
@@ -406,27 +386,25 @@
           <!-- Input Card -->
           <div class="input-card input-card-pill input-card-sm border mb-3">
             <div class="input-card-form">
-              <label for="subscribeForm" class="form-label visually-hidden"
-                >ایمیل را وارد کنید</label
-              >
+              <label for="subscribeForm" class="form-label visually-hidden">{% trans "Enter your email" %}</label>
               <input
                 type="text"
                 class="form-control form-control-lg"
                 id="subscribeForm"
-                placeholder="ایمیل خود را وارد نمایید"
-                aria-label="ایمیل خود را وارد کنید"
+                placeholder="{% trans 'Enter your email address' %}"
+                aria-label="{% trans 'Enter your email' %}"
               />
             </div>
             <button type="button" class="btn btn-primary btn-lg rounded-pill">
-              ثبت نام
+              {% trans "Subscribe" %}
             </button>
           </div>
           <!-- End Input Card -->
         </form>
 
         <p class="small">
-          می توانید در هر زمانی اشتراک خود را لغو کنید
-          <a href="#">سیاست حفظ حریم خصوصی</a> ما را بخوانید
+          {% trans "You can unsubscribe at any time" %}
+          <a href="#">{% trans "Read our privacy policy" %}</a>
         </p>
       </div>
     </div>

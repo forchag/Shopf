@@ -1,22 +1,25 @@
 from django.views.generic import TemplateView, FormView, View
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.shortcuts import redirect
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
-from .models import AddressModel, OrderModel, CouponModel, OrderItemsModel
-from cart.models import CartModel
-from .forms import CheckOutForm
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.utils.translation import gettext, gettext_lazy as _
+
 from cart.cart import CartSession
-from payment.zarinpal_client import ZarinPalSandbox
+from cart.models import CartModel
 from payment.models import PaymentModel
+from payment.zarinpal_client import ZarinPalSandbox
+
+from .forms import CheckOutForm
+from .models import AddressModel, CouponModel, OrderItemsModel, OrderModel
 
 
 class CheckOutView(LoginRequiredMixin, SuccessMessageMixin, FormView):
     template_name = "order/checkout.html"
     form_class = CheckOutForm
     success_url = reverse_lazy("order:complete")
-    success_message = "سفارش با موفقیت ثبت شد"
+    success_message = _("Your order was placed successfully")
 
     def get_form_kwargs(self):
         kwargs = super(CheckOutView, self).get_form_kwargs()
@@ -96,17 +99,17 @@ class CheckOutView(LoginRequiredMixin, SuccessMessageMixin, FormView):
 class CheckView(View):
     def post(self, request, *args, **kwargs):
         coupon_code = request.POST.get("coupon_code")
-        message = "کد تخفیف با موفقیت ثبت شد"
+        message = gettext("Discount code applied successfully")
         try:
             coupon = CouponModel.objects.get(code=coupon_code)
         except CouponModel.DoesNotExist:
-            return JsonResponse({"message": "کد تخفیف یافت نشد"})
+            return JsonResponse({"message": gettext("Discount code not found")})
 
         else:
             if self.request.user in coupon.used_by.all():
-                message = "این کد توسط شما یک بار استفاده شده است"
+                message = gettext("You have already used this code once")
             if coupon.max_limit_usage == 0:
-                message = "کد دیگر فاقد ارزش است"
+                message = gettext("This code is no longer valid")
             else:
                 cart = CartModel.objects.get(user=self.request.user)
 

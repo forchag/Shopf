@@ -1,10 +1,13 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+
+from order.models import AddressModel
+
 from ...permissions import CustomerPermissions
 from ..forms import *
-from order.models import AddressModel
 
 
 class AddressesView(LoginRequiredMixin, CustomerPermissions, ListView):
@@ -21,7 +24,7 @@ class AddAddressesView(
 ):
     form_class = AddAddressesForm
     template_name = "dashboard/customer/orders/add-addresses.html"
-    success_message = "آدرس با موفقیت ذخیره شد"
+    success_message = _("Address saved successfully")
     success_url = reverse_lazy("dashboard:customer:addresses")
 
     def form_valid(self, form):
@@ -35,7 +38,7 @@ class ChangeAddressesView(
     template_name = "dashboard/customer/orders/change-addresses.html"
     form_class = AddAddressesForm
     success_url = reverse_lazy("dashboard:customer:addresses")
-    success_message = "Profile changed successfully"
+    success_message = _("Profile changed successfully")
 
     def get_object(self, queryset=None):
         return AddressModel.objects.get(

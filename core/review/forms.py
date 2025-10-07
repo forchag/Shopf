@@ -1,4 +1,6 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
+
 from .models import ReviewModel
 
 
@@ -9,6 +11,6 @@ class ReviewForm(forms.ModelForm):
 
         error_messages = {
             "description": {
-                "required": "فیلد توضیحات اجباری است",
+                "required": _("The description field is required."),
             },
         }
