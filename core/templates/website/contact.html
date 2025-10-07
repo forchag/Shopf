@@ -1,13 +1,13 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
         <!-- Hero -->
         <div class="position-relative bg-img-start" style="background-image: url(./assets/svg/components/card-11.svg);">
             <div class="container content-space-t-3 content-space-t-lg-5 content-space-b-2 position-relative zi-2">
                 <div class="w-md-75 w-lg-50 text-center mx-md-auto mb-5 mb-md-9">
-                    <h1>تماس با ما</h1>
-                    <p>نظرات و انتقادات خود را بیان کنین</p>
+                    <h1>{% trans "Contact us" %}</h1>
+                    <p>{% trans "Share your feedback and suggestions" %}</p>
                 </div>
 
                 <div class="row">
@@ -28,12 +28,12 @@
 
                                 </div>
 
-                                <h4 class="card-title">مشاوره خرید</h4>
-                                <p class="card-text text-body">دانش کافی در زمان خرید داشته باشید</p>
+                                <h4 class="card-title">{% trans "Purchase consultation" %}</h4>
+                                <p class="card-text text-body">{% trans "Gain the knowledge you need when making a purchase" %}</p>
                             </div>
 
                             <div class="card-footer pt-0">
-                                <span class="card-link">تماس با پشتیبانی <i
+                                <span class="card-link">{% trans "Contact support" %} <i
                                         class="bi-chevron-left small ms-1"></i></span>
                             </div>
                         </a>
@@ -58,12 +58,12 @@
 
                                 </div>
 
-                                <h4 class="card-title">سوالات متداول</h4>
-                                <p class="card-text text-body">سوالات خود را از ما بپرسید و پیدا کنین</p>
+                                <h4 class="card-title">{% trans "Frequently asked questions" %}</h4>
+                                <p class="card-text text-body">{% trans "Ask us anything and find the answers you need" %}</p>
                             </div>
 
                             <div class="card-footer pt-0">
-                                <span class="card-link">مشاهده سوالات<i class="bi-chevron-left small ms-1"></i></span>
+                                <span class="card-link">{% trans "View questions" %}<i class="bi-chevron-left small ms-1"></i></span>
                             </div>
                         </a>
                         <!-- End Card -->
@@ -87,12 +87,12 @@
 
                                 </div>
 
-                                <h4 class="card-title">کمک به توسعه</h4>
-                                <p class="card-text text-body">پیشنهادات سازنده خود را به توسعه دهندگان انتقال دهید</p>
+                                <h4 class="card-title">{% trans "Contribute to development" %}</h4>
+                                <p class="card-text text-body">{% trans "Share your constructive ideas with the developers" %}</p>
                             </div>
 
                             <div class="card-footer pt-0">
-                                <span class="card-link">تماس با پشتیبانی<i class="bi-chevron-left small ms-1"></i></span>
+                                <span class="card-link">{% trans "Contact support" %}<i class="bi-chevron-left small ms-1"></i></span>
                             </div>
                         </a>
                         <!-- End Card -->
@@ -120,8 +120,8 @@
                     <div class="card-body">
                         <!-- Heading -->
                         <div class="text-center mb-5 mb-md-9">
-                            <h2>فرم تماس با پشتیبانی</h2>
-                            <p>سوال یا نظرات خود را مطرح کنین</p>
+                            <h2>{% trans "Support contact form" %}</h2>
+                            <p>{% trans "Let us know your questions or comments" %}</p>
                         </div>
                         <!-- End Heading -->
 
@@ -132,10 +132,10 @@
                                 <div class="col-sm-6">
                                     <!-- Form -->
                                     <div class="mb-3">
-                                        <label class="form-label" for="hireUsFormFirstName">نام</label>
+                                        <label class="form-label" for="hireUsFormFirstName">{% trans "First name" %}</label>
                                         <input type="text" class="form-control form-control-lg"
                                             name="name" id="hireUsFormFirstName"
-                                            placeholder="نام" aria-label="First name">
+                                            placeholder="{% trans 'First name' %}" aria-label="{% trans 'First name' %}">
                                     </div>
                                     <!-- End Form -->
                                 </div>
@@ -144,10 +144,10 @@
                                 <div class="col-sm-6">
                                     <!-- Form -->
                                     <div class="mb-3">
-                                        <label class="form-label" for="hireUsFormLasttName">نام خانوادگی</label>
+                                        <label class="form-label" for="hireUsFormLasttName">{% trans "Last name" %}</label>
                                         <input type="text" class="form-control form-control-lg"
                                             name="last_name" id="hireUsFormLasttName"
-                                            placeholder="نام خانوادگی" aria-label="Last name">
+                                            placeholder="{% trans 'Last name' %}" aria-label="{% trans 'Last name' %}">
                                     </div>
                                     <!-- End Form -->
                                 </div>
@@ -159,10 +159,11 @@
                                 <div class="col-sm-6">
                                     <!-- Form -->
                                     <div class="mb-3">
-                                        <label class="form-label" for="hireUsFormWorkEmail">آدرس ایمیل</label>
+                                        <label class="form-label" for="hireUsFormWorkEmail">{% trans "Email address" %}</label>
                                         <input type="email" class="form-control form-control-lg"
                                             name="email" id="hireUsFormWorkEmail"
-                                            placeholder="email@site.com" aria-label="email@site.com">
+                                            placeholder="{% trans 'email@example.com' %}"
+                                            aria-label="{% trans 'Email address' %}">
                                     </div>
                                     <!-- End Form -->
                                 </div>
@@ -171,11 +172,12 @@
                                 <div class="col-sm-6">
                                     <!-- Form -->
                                     <div class="mb-3">
-                                        <label class="form-label" for="hireUsFormPhone">شماره همراه <span
-                                                class="form-label-secondary">(اختیاری)</span></label>
+                                        <label class="form-label" for="hireUsFormPhone">{% trans "Phone number" %} <span
+                                                class="form-label-secondary">{% trans "(optional)" %}</span></label>
                                         <input type="text" class="form-control form-control-lg"
                                             name="phone_number" id="hireUsFormPhone"
-                                            placeholder="+9891200000">
+                                            placeholder="{% trans '+1 (555) 000-0000' %}"
+                                            aria-label="{% trans 'Phone number' %}">
                                     </div>
                                     <!-- End Form -->
                                 </div>
@@ -185,19 +187,19 @@
 
                             <!-- Form -->
                             <div class="mb-3">
-                                <label class="form-label" for="hireUsFormDetails">توضیحات</label>
+                                <label class="form-label" for="hireUsFormDetails">{% trans "Details" %}</label>
                                 <textarea class="form-control form-control-lg" name="description"
-                                    id="hireUsFormDetails" placeholder="توضیحات خود را وارد نمایید"
-                                    aria-label="Tell us about your ..." rows="4"></textarea>
+                                    id="hireUsFormDetails" placeholder="{% trans 'Enter your message' %}"
+                                    aria-label="{% trans 'Tell us about your request' %}" rows="4"></textarea>
                             </div>
                             <!-- End Form -->
 
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg">ارسال درخواست</button>
+                                <button type="submit" class="btn btn-primary btn-lg">{% trans "Submit request" %}</button>
                             </div>
 
                             <div class="text-center">
-                                <p class="form-text">تیکت ها در اسرع وقت پاسخ داده خواهند شد</p>
+                                <p class="form-text">{% trans "We will respond to tickets as soon as possible" %}</p>
                             </div>
                         </form>
                         <!-- End Form -->

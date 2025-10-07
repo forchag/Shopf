@@ -1,13 +1,16 @@
-from django.views.generic import ListView, CreateView
-from django.urls import reverse_lazy
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import FieldError
+from django.db.models import Count, F
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import CreateView, ListView
+
+from order.models import CouponModel
+
 from ...permissions import AdminPermissions
 from ..forms import AdminCouponForm
-from order.models import CouponModel
 from ..forms import *
-from django.db.models import Count, F
 
 
 class AdminCouponView(LoginRequiredMixin, AdminPermissions, ListView):
@@ -47,4 +50,4 @@ class AdminCouponCreateView(
     template_name = "dashboard/admin/coupons/coupon-create.html"
     form_class = AdminCouponForm
     success_url = reverse_lazy("dashboard:admin:coupon-list")
-    success_message = "کد تخفیف با موفقیت ایجاد شد"
+    success_message = _("Coupon created successfully")

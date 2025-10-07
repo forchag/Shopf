@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm
+from django.utils.translation import gettext_lazy as _
+
 from accounts.models import Profile
 
 
@@ -21,10 +23,10 @@ class ProfileForm(forms.ModelForm):
         ] = "form-control text-center"
         self.fields["first_name"].widget.attrs[
             "placeholder"
-        ] = "نام خود را وارد نمایید"
+        ] = _("Enter your first name")
         self.fields["last_name"].widget.attrs[
             "placeholder"
-        ] = "نام خانوادگی را وارد نمایید"
+        ] = _("Enter your last name")
         self.fields["phone_number"].widget.attrs[
             "placeholder"
-        ] = "شماره همراه را وارد نمایید"
+        ] = _("Enter your phone number")

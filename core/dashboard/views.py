@@ -1,10 +1,11 @@
-from django.views.generic import View, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from accounts.models import UserType
 from django.contrib.messages.views import SuccessMessageMixin
-from accounts.models import Profile
-from django.urls import reverse_lazy
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import UpdateView, View
+
+from accounts.models import Profile, UserType
 
 
 class DashboardCheckView(LoginRequiredMixin, View):
@@ -22,7 +23,7 @@ class ProfileEditView(UpdateView, SuccessMessageMixin):
     model = Profile
     fields = ["avatar"]
     success_url = reverse_lazy("dashboard:check")
-    success_message = "عکس پروفایل شما با موفقیت تغییر کرد"
+    success_message = _("Your profile picture has been updated successfully")
 
     def get_object(self, queryset=None):
         return Profile.objects.get(user=self.request.user)

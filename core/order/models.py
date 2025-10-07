@@ -3,10 +3,13 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from decimal import Decimal
 
 
+from django.utils.translation import gettext_lazy as _
+
+
 class OrderStatusModel(models.IntegerChoices):
-    pending = 1, "در انتظار پرداخت"
-    success = 2, "موفقیت آمیز"
-    faild = 3, "لغو شده"
+    pending = 1, _("Pending payment")
+    success = 2, _("Successful")
+    faild = 3, _("Cancelled")
 
 
 class AddressModel(models.Model):

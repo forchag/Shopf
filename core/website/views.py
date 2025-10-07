@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect
-from django.views.generic import TemplateView, CreateView
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import CreateView, TemplateView
 from django.contrib.messages.views import SuccessMessageMixin
 from dashboard.models import TicketModel
 
@@ -18,11 +19,11 @@ class ContactView(CreateView, SuccessMessageMixin):
     model = TicketModel
     fields = "__all__"
     success_url = "/contact/"
-    success_message = "تیکت شما با موفقیت ارسال شد"
+    success_message = _("Your ticket was sent successfully")
 
     error_messages = {
         "name": {
-            "required": "فیلد اسم اجباری است",
+            "required": _("The name field is required."),
         },
     }
 

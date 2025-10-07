@@ -90,7 +90,7 @@ class Profile(models.Model):
     def get_fullname(self):
         if self.first_name or self.last_name:
             return self.first_name + " " + self.last_name
-        return "کاربر جدید"
+        return _("New user")
 
 
 @receiver(post_save, sender=User)

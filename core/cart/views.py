@@ -1,5 +1,6 @@
-from django.views.generic import View, TemplateView
 from django.http import JsonResponse
+from django.utils.translation import gettext as _
+from django.views.generic import TemplateView, View
 from .cart import CartSession
 
 
@@ -14,7 +15,7 @@ class AddProdView(View):
             {
                 "cart": cart.get_cart(),
                 "total_quantity": cart.get_cart_quantity(),
-                "message": "!!محصول به سبد خرید اضافه شد",
+                "message": _("Product added to the cart!"),
             }
         )
 

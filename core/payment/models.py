@@ -1,10 +1,11 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class PaymentStatus(models.IntegerChoices):
-    pending = 1, "در حال انتظار"
-    success = 2, "موفق"
-    faild = 3, "نا موفق"
+    pending = 1, _("Pending")
+    success = 2, _("Successful")
+    faild = 3, _("Failed")
 
 
 class PaymentModel(models.Model):

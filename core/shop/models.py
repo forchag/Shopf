@@ -1,12 +1,13 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django_ckeditor_5.fields import CKEditor5Field
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class ProductStatus(models.IntegerChoices):
-    active = 1, "فعال"
-    deactive = 2, "غیرفعال"
+    active = 1, _("Active")
+    deactive = 2, _("Inactive")
 
 
 class CategoryModel(models.Model):

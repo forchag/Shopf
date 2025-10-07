@@ -1,12 +1,16 @@
 from django.views import generic
-from django.db.models import Count, Q
-from review.models import ReviewModel
-from .models import ProductModel, ProductStatus, CategoryModel, WishListModel
 from django.core.exceptions import FieldError
-from cart.cart import CartSession
+from django.db.models import Count, Q
 from django.http import JsonResponse
-from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
+from django.utils.translation import gettext as _
+from django.views import generic
+from django.views.decorators.cache import cache_page
+
+from cart.cart import CartSession
+from review.models import ReviewModel
+
+from .models import CategoryModel, ProductModel, ProductStatus, WishListModel
 
 
 # @method_decorator(cache_page(60 * 15), name="dispatch")
@@ -122,8 +126,8 @@ class AddOrRemoveWish(generic.View):
             wish_obj, created = WishListModel.objects.get_or_create(
                 user=request.user, product_id=product_id
             )
-            message = "محصول به لیست علایق اضافه شد"
+            message = _("Product added to wishlist")
             if not created:
                 wish_obj.delete()
-                message = "محصول از لیست علایق حذف شد"
+                message = _("Product removed from wishlist")
         return JsonResponse({"message": message})

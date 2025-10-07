@@ -1,11 +1,13 @@
-from django.views.generic import ListView, DeleteView, DetailView
-from django.urls import reverse_lazy
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import FieldError
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import DeleteView, DetailView, ListView
+
+from ...models import TicketModel
 from ...permissions import AdminPermissions
 from ..forms import *
-from ...models import TicketModel
 
 
 class AdminTicketListView(LoginRequiredMixin, AdminPermissions, ListView):
@@ -41,4 +43,4 @@ class AdminTicketDeleteView(
     queryset = TicketModel.objects.all()
     template_name = "dashboard/admin/tickets/ticket-delete.html"
     success_url = reverse_lazy("dashboard:admin:ticket-list")
-    success_message = "تیکت با موفقیت حذف شد"
+    success_message = _("Ticket deleted successfully")

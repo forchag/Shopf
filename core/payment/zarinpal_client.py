@@ -1,6 +1,8 @@
-import requests
 import json
+
+import requests
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 
 class ZarinPalSandbox:
@@ -15,7 +17,7 @@ class ZarinPalSandbox:
     def __init__(self, merchant_id=settings.MERCHANT_ID):
         self.merchant_id = merchant_id
 
-    def payment_request(self, amount, description="درگاه پرداخت"):
+    def payment_request(self, amount, description=_("Payment gateway")):
         payload = {
             "merchant_id": self.merchant_id,
             "amount": int(amount),

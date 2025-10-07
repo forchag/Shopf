@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
+from django.views.generic import CreateView
 from .models import ReviewModel
 from .forms import ReviewForm
 
@@ -15,7 +16,7 @@ class ReviewView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()
-        messages.success(self.request, "دیدگاه شما با موفقیت ثبت شد")
+        messages.success(self.request, _("Your review has been submitted successfully."))
         return redirect(
             reverse_lazy(
                 "shop:detail", kwargs={"slug": form.instance.product.slug}

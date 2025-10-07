@@ -1,11 +1,14 @@
-from django.views.generic import UpdateView, ListView
-from django.urls import reverse_lazy
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import FieldError
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import ListView, UpdateView
+
+from accounts.models import User, UserType
+
 from ...permissions import AdminPermissions
 from ..forms import *
-from accounts.models import User, UserType
 
 
 class AdminMemberListView(LoginRequiredMixin, AdminPermissions, ListView):
@@ -38,7 +41,7 @@ class AdminMemberEditView(
 ):
     template_name = "dashboard/admin/members/member-edit.html"
     form_class = AdminMemberEditForm
-    success_message = "کاربر با موفقیت ویرایش شد"
+    success_message = _("User updated successfully")
 
     def get_queryset(self):
         return (
