@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView, UpdateView
 
-from accounts.models import User
+from accounts.models import Profile, User
 
 from ...permissions import CustomerPermissions
 from ..forms import *
