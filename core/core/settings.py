@@ -1,5 +1,5 @@
 from pathlib import Path
-from decouple import config
+from decouple import config, Csv
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -13,9 +13,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY", default="test")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", default=False, cast=bool)
+DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = ["164.68.123.184"]
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS", default="127.0.0.1,localhost,164.68.123.184", cast=Csv()
+)
 
 
 # Application definition
@@ -47,6 +49,9 @@ INSTALLED_APPS = [
     "review",
 ]
 
+if DEBUG:
+    INSTALLED_APPS.append("debug_toolbar")
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -57,6 +62,10 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+if DEBUG:
+    MIDDLEWARE.insert(1, "debug_toolbar.middleware.DebugToolbarMiddleware")
+    INTERNAL_IPS = config("INTERNAL_IPS", default="127.0.0.1", cast=Csv())
 
 ROOT_URLCONF = "core.urls"
 
@@ -83,18 +92,26 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": config(
-            "DB_ENGINE", default="django.db.backends.postgresql"
-        ),
-        "NAME": config("DB_NAME", default="postgres"),
-        "USER": config("DB_USER", default="postgres"),
-        "PASSWORD": config("DB_PASS", default="postgres"),
-        "HOST": config("DB_HOST", default="db"),
-        "PORT": config("DB_PORT", cast=int, default=5432),
+DB_ENGINE = config("DB_ENGINE", default="django.db.backends.sqlite3")
+
+if DB_ENGINE == "django.db.backends.sqlite3":
+    DATABASES = {
+        "default": {
+            "ENGINE": DB_ENGINE,
+            "NAME": BASE_DIR / config("DB_NAME", default="db.sqlite3"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": DB_ENGINE,
+            "NAME": config("DB_NAME", default="postgres"),
+            "USER": config("DB_USER", default="postgres"),
+            "PASSWORD": config("DB_PASS", default="postgres"),
+            "HOST": config("DB_HOST", default="db"),
+            "PORT": config("DB_PORT", cast=int, default=5432),
+        }
+    }
 
 
 # Password validation
@@ -144,25 +161,37 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 
-MERCHANT_ID = "4ced0a1e-4ad8-4309-9668-3ea3ae8e7897"
+MERCHANT_ID = config(
+    "MERCHANT_ID", default="4ced0a1e-4ad8-4309-9668-3ea3ae8e7897"
+)
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "benxfoxy@gmail.com"
-EMAIL_HOST_PASSWORD = "htgk tzdv dsqq mbna"
+EMAIL_HOST = config("EMAIL_HOST", default="smtp.gmail.com")
+EMAIL_PORT = config("EMAIL_PORT", default=587, cast=int)
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", default=True, cast=bool)
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis:6379/1",  # Redis container address
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        },
-        "KEY_PREFIX": "core",
+REDIS_URL = config("REDIS_URL", default="")
+
+if REDIS_URL:
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_URL,
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            },
+            "KEY_PREFIX": "core",
+        }
     }
-}
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "unique-snowflake",
+        }
+    }
 
 
 RECAPTCHA_PUBLIC_KEY = "6LcYyLMqAAAAABSQonaG3l7xeOuMowVNQ8jShdG9"
@@ -328,26 +357,44 @@ SIMPLE_JWT = {
 CORS_ALLOW_ALL_ORIGINS = True
 
 
-# -------------------------
-# ✅ MEDIA FILES (MinIO)
-# -------------------------
+USE_MINIO = config("USE_MINIO", default=False, cast=bool)
 
-# Use MinIO for media files
-DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
+if USE_MINIO:
+    # Use MinIO for media files
+    DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
 
-# MinIO Connection Details
-MINIO_STORAGE_ENDPOINT = config("MINIO_STORAGE_ENDPOINT", default="minio:9000")
-MINIO_EXTERNAL_STORAGE_ENDPOINT = config("MINIO_EXTERNAL_STORAGE_ENDPOINT", default="http://127.0.0.1:9000")
+    # MinIO Connection Details
+    MINIO_STORAGE_ENDPOINT = config(
+        "MINIO_STORAGE_ENDPOINT", default="127.0.0.1:9000"
+    )
+    MINIO_EXTERNAL_STORAGE_ENDPOINT = config(
+        "MINIO_EXTERNAL_STORAGE_ENDPOINT", default="http://127.0.0.1:9000"
+    )
 
-# MinIO Authentication
-MINIO_STORAGE_ACCESS_KEY = config("MINIO_STORAGE_ACCESS_KEY", default="minioadmin")
-MINIO_STORAGE_SECRET_KEY = config("MINIO_STORAGE_SECRET_KEY", default="minioadmin")
-MINIO_STORAGE_USE_HTTPS = config("MINIO_STORAGE_USE_HTTPS", cast=bool, default=False)
+    # MinIO Authentication
+    MINIO_STORAGE_ACCESS_KEY = config(
+        "MINIO_STORAGE_ACCESS_KEY", default="minioadmin"
+    )
+    MINIO_STORAGE_SECRET_KEY = config(
+        "MINIO_STORAGE_SECRET_KEY", default="minioadmin"
+    )
+    MINIO_STORAGE_USE_HTTPS = config(
+        "MINIO_STORAGE_USE_HTTPS", cast=bool, default=False
+    )
 
-# MinIO Media Bucket Settings
-MINIO_STORAGE_MEDIA_BUCKET_NAME = config("MINIO_STORAGE_MEDIA_BUCKET_NAME", default="media")
-MINIO_STORAGE_MEDIA_USE_PRESIGNED = False  # True if you want signed URLs for private access
-MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True  # Auto-create bucket if not exists
+    # MinIO Media Bucket Settings
+    MINIO_STORAGE_MEDIA_BUCKET_NAME = config(
+        "MINIO_STORAGE_MEDIA_BUCKET_NAME", default="media"
+    )
+    MINIO_STORAGE_MEDIA_USE_PRESIGNED = False  # True if you want signed URLs for private access
+    MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = (
+        True  # Auto-create bucket if not exists
+    )
 
-# URL to access media files from MinIO
-MEDIA_URL = f"{MINIO_EXTERNAL_STORAGE_ENDPOINT}/{MINIO_STORAGE_MEDIA_BUCKET_NAME}/"
+    # URL to access media files from MinIO
+    MEDIA_URL = (
+        f"{MINIO_EXTERNAL_STORAGE_ENDPOINT}/{MINIO_STORAGE_MEDIA_BUCKET_NAME}/"
+    )
+else:
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = BASE_DIR / "media"
