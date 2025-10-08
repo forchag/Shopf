@@ -39,7 +39,7 @@ if settings.DEBUG:
 
     schema_view = get_schema_view(
         openapi.Info(
-            title="Django Online Shop API",
+            title="Felio Design API",
             default_version="v1",
             description="you can use it by any front end framework like (React, Vue, Angular, ...)",
             terms_of_service="https://www.google.com/policies/terms/",
