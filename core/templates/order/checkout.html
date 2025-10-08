@@ -136,7 +136,7 @@
       priceDetails.append(discountSpan);
       // $('#final-price').val() -= discounted_price;
       var newPrice = parseInt($('#final-price').text().replace(/,/g, "")) - discounted_price;
-      $('#final-price').text(newPrice.toLocaleString())
+      $('#final-price').text(newPrice.toLocaleString('en-US'))
 
 
     }
