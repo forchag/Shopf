@@ -47,9 +47,9 @@
               <a class="text-dark" href="{% url 'shop:detail' slug=latest_product.slug %}">{{latest_product.title}}</a>
             </h4>
             {% if latest_product.discount_percent %}
-            <p class="card-text text-dark">{{latest_product.offer|intcomma}} {% trans "Toman" %} <span class="text-body ms-1"><del>{{latest_product.price|intcomma}} {% trans "Toman" %}</del></span></p>
+            <p class="card-text text-dark">{{latest_product.offer|intcomma}} {% trans "XCFA" %} <span class="text-body ms-1"><del>{{latest_product.price|intcomma}} {% trans "XCFA" %}</del></span></p>
             {% else %}
-            <p class="card-text text-dark">{{latest_product.price|intcomma}} {% trans "Toman" %}</p>
+            <p class="card-text text-dark">{{latest_product.price|intcomma}} {% trans "XCFA" %}</p>
             {% endif %}
           </div>
 
