@@ -4,23 +4,6 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
- @font-face {
-	font-family: vazir;
-	src: url('../fonts/vazir/Vazir-Light-FD-WOL.eot');
-	src: url('../fonts/vazir/Vazir-Light-FD-WOL.eot') format('embedded-opentype'), url('../fonts/vazir/Vazir-Light-FD-WOL.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
-  font-display: swap;
-}
-@font-face {
-	font-family: vazir-bold;
-	src: url('../fonts/vazir/vazir-Bold.eot');
-	src: url('../fonts/vazir/vazir-Blod.eot') format('embedded-opentype'), url('../fonts/vazir/Vazir-Bold-FD.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --bs-blue: #377dff;
   --bs-indigo: #6610f2;
@@ -75,7 +58,7 @@
     rgba(255, 255, 255, 0.15),
     rgba(255, 255, 255, 0)
   );
-  --bs-body-font-family: vazir,vazir,Inter, sans-serif;
+  --bs-body-font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -103,12 +86,13 @@
 }
 body {
   margin: 0;
-  font-family: var(--bs-body-font-family);
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif !important;
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
-  text-align: var(--bs-body-text-align);
+  direction: ltr;
+  text-align: left;
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
@@ -5448,7 +5432,7 @@ fieldset:disabled .btn {
   display: block;
   padding: var(--bs-tooltip-arrow-height);
   margin: var(--bs-tooltip-margin);
-  font-family: vazir,Inter, sans-serif;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -5561,7 +5545,7 @@ fieldset:disabled .btn {
   z-index: var(--bs-popover-zindex);
   display: block;
   max-width: var(--bs-popover-max-width);
-  font-family: vazir,Inter, sans-serif;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -24084,13 +24068,13 @@ a:hover .text-inherit {
 }
 .quill-custom .ql-editor p {
   font-size: 1rem;
-  font-family: vazir,Inter, sans-serif;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   color: #1e2022;
 }
 .quill-custom .ql-editor.ql-blank::before {
   left: 1rem;
   color: #8c98a4;
-  font-family: vazir,Inter, sans-serif;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
 }
 .quill-custom .ql-snow.ql-toolbar .ql-fill {
@@ -24134,7 +24118,7 @@ a:hover .text-inherit {
 .quill-custom .ql-snow .ql-tooltip::before {
   display: block;
   text-align: center;
-  font-family: vazir,Inter, sans-serif;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-weight: 600;
   font-size: 1rem;
   border-bottom: 0.0625rem solid rgba(33, 50, 91, 0.1);
@@ -24166,7 +24150,7 @@ a:hover .text-inherit {
 .quill-custom .ql-snow .ql-tooltip.ql-editing input[type="text"] {
   height: auto;
   display: block;
-  font-family: vazir,Inter, sans-serif;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
 }
 .quill-custom .ql-snow .ql-tooltip.ql-editing input[type="text"]:focus {
   border-color: rgba(140, 152, 164, 0.25);
