@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     "django.contrib.sitemaps",
     "django_ckeditor_5",
     "minio_storage",
-    "django_recaptcha",
     "website",
     "accounts",
     "shop",
@@ -194,10 +193,6 @@ else:
             "LOCATION": "unique-snowflake",
         }
     }
-
-
-RECAPTCHA_PUBLIC_KEY = "6LcYyLMqAAAAABSQonaG3l7xeOuMowVNQ8jShdG9"
-RECAPTCHA_PRIVATE_KEY = "6LcYyLMqAAAAADNZwf4Z3rQZkA_EJ5hJO8Rvb402"
 
 
 customColorPalette = [

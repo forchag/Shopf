@@ -2,15 +2,12 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError
-from django_recaptcha.fields import ReCaptchaField
-from django_recaptcha.widgets import ReCaptchaV3
 from .models import User
 from django.utils.translation import gettext_lazy as _
 
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    captcha = ReCaptchaField(widget=ReCaptchaV3)
 
     class Meta:
         model = User
@@ -18,7 +15,6 @@ class RegistrationForm(UserCreationForm):
 
 
 class CustomAuthenticationForm(AuthenticationForm):
-    captcha = ReCaptchaField(widget=ReCaptchaV3)
 
     error_messages = {
         "invalid_login": _("Please enter a correct email address and password."),
