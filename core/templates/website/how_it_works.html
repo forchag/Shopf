@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "How Shopf Works" %}{% endblock title %}
+
+{% block content %}
+  <div class="bg-light">
+    <div class="container content-space-2 content-space-lg-3">
+      <div class="w-lg-75 text-center mx-lg-auto mb-7">
+        <span class="text-cap text-primary">{% trans "Guided tour" %}</span>
+        <h1 class="display-5">{% trans "Selling and buying on Shopf" %}</h1>
+        <p class="lead">{% blocktrans trimmed %}Follow these steps to publish new inventory, control pricing, and understand what the customer sees from discovery to delivery. The Shopf dashboard keeps everything in one place so you can move from setup to sales with confidence.{% endblocktrans %}</p>
+      </div>
+
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="pe-lg-6">
+            <span class="badge bg-soft-primary text-primary small mb-3">{% trans "Merchant workflow" %}</span>
+            <h2 class="h3">{% trans "Add a product and manage its offer" %}</h2>
+            <p class="text-muted">{% blocktrans trimmed %}Store owners manage products from the dashboard area that is available after signing in with an administrator account.{% endblocktrans %}</p>
+
+            <ul class="list-unstyled list-py-2">
+              <li class="d-flex">
+                <span class="me-3">1.</span>
+                <div>
+                  <h3 class="h6 mb-1">{% trans "Open the admin product list" %}</h3>
+                  <p class="text-muted mb-0">{% blocktrans trimmed %}Navigate to <strong>Dashboard → Admin → Products → Show</strong> to review existing inventory, or go directly to the create form at <strong>/dashboard/admin/products/create/</strong>.{% endblocktrans %}</p>
+                </div>
+              </li>
+              <li class="d-flex">
+                <span class="me-3">2.</span>
+                <div>
+                  <h3 class="h6 mb-1">{% trans "Describe the item" %}</h3>
+                  <p class="text-muted mb-0">{% blocktrans trimmed %}Provide the product name, categories, detailed description, media gallery, and any tags customers should use when searching.{% endblocktrans %}</p>
+                </div>
+              </li>
+              <li class="d-flex">
+                <span class="me-3">3.</span>
+                <div>
+                  <h3 class="h6 mb-1">{% trans "Set pricing and availability" %}</h3>
+                  <p class="text-muted mb-0">{% blocktrans trimmed %}Define the base price, optional discount, SKU and stock quantity. You can revisit the edit screen to adjust pricing whenever campaigns change.{% endblocktrans %}</p>
+                </div>
+              </li>
+              <li class="d-flex">
+                <span class="me-3">4.</span>
+                <div>
+                  <h3 class="h6 mb-1">{% trans "Publish and monitor" %}</h3>
+                  <p class="text-muted mb-0">{% blocktrans trimmed %}Save the form to publish the product. Incoming orders appear under <strong>Dashboard → Admin → Orders</strong> where fulfillment, status updates, and refunds are managed.{% endblocktrans %}</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="alert alert-soft-primary" role="alert">
+              <div class="d-flex">
+                <div class="flex-shrink-0">
+                  <i class="bi-lightning-charge"></i>
+                </div>
+                <div class="flex-grow-1 ms-2">
+                  <h3 class="h6 mb-1">{% trans "Need profile permissions?" %}</h3>
+                  <p class="text-muted mb-0">{% blocktrans trimmed %}Only staff members with admin privileges can access the product management tools. Add a teammate from the member settings if you need additional help.{% endblocktrans %}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card shadow-sm">
+            <img class="card-img-top" src="{% static 'img/960x960/img30.jpg' %}" alt="{% trans 'Dashboard preview' %}">
+            <div class="card-body">
+              <span class="badge bg-soft-success text-success small mb-3">{% trans "Pro tip" %}</span>
+              <h3 class="h5">{% trans "Reuse drafts" %}</h3>
+              <p class="text-muted mb-0">{% blocktrans trimmed %}Save products as drafts while you source imagery or finalize pricing. Drafts stay hidden from customers until you publish.{% endblocktrans %}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container content-space-2 content-space-lg-3">
+    <div class="row justify-content-lg-between align-items-lg-center mb-7">
+      <div class="col-lg-5 order-lg-2">
+        <span class="badge bg-soft-secondary text-secondary small mb-3">{% trans "Buyer journey" %}</span>
+        <h2 class="h3">{% trans "What customers experience" %}</h2>
+        <p class="text-muted">{% blocktrans trimmed %}Once a product is published it immediately becomes part of the storefront. The steps below describe what a shopper does to complete a purchase.{% endblocktrans %}</p>
+
+        <ol class="list-py-2 ps-3">
+          <li>
+            <h3 class="h6 mb-1">{% trans "Discover products" %}</h3>
+            {% url 'shop:list_grid' as shop_url %}
+            <p class="text-muted mb-0">{% blocktrans trimmed with shop_url=shop_url %}Customers browse the catalogue at <strong>{{ shop_url }}</strong>, filter by categories, or open a product detail page to review descriptions, price, and availability.{% endblocktrans %}</p>
+          </li>
+          <li>
+            <h3 class="h6 mb-1">{% trans "Add to cart" %}</h3>
+            <p class="text-muted mb-0">{% blocktrans trimmed %}From the product page they select quantity and press <strong>Add to cart</strong>. The mini cart (basket icon) updates instantly so they can keep shopping or proceed to checkout.{% endblocktrans %}</p>
+          </li>
+          <li>
+            <h3 class="h6 mb-1">{% trans "Checkout" %}</h3>
+            {% url 'cart:cart-summery' as cart_url %}
+            {% url 'order:checkout' as checkout_url %}
+            <p class="text-muted mb-0">{% blocktrans trimmed with cart_url=cart_url checkout_url=checkout_url %}At <strong>{{ cart_url }}</strong> shoppers review their basket, apply coupons, and continue to the secure checkout at <strong>{{ checkout_url }}</strong> where shipping and payment details are collected.{% endblocktrans %}</p>
+          </li>
+          <li>
+            <h3 class="h6 mb-1">{% trans "Order tracking" %}</h3>
+            <p class="text-muted mb-0">{% blocktrans trimmed %}After paying, customers land on the confirmation screen and can revisit <strong>Dashboard → Customer → Orders</strong> to see status updates whenever they sign in.{% endblocktrans %}</p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="col-lg-6 order-lg-1">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-5">
+            <h3 class="h5 mb-4">{% trans "Communication tips" %}</h3>
+            <ul class="list-unstyled list-py-2 mb-0">
+              <li class="d-flex">
+                <span class="btn btn-soft-primary btn-icon rounded-circle me-3">
+                  <i class="bi-chat-text"></i>
+                </span>
+                <div>
+                  <h4 class="h6 mb-1">{% trans "Use tickets for support" %}</h4>
+                  <p class="text-muted mb-0">{% blocktrans trimmed %}Customers can open tickets via the contact page. Respond quickly from the admin ticket panel to maintain trust.{% endblocktrans %}</p>
+                </div>
+              </li>
+              <li class="d-flex">
+                <span class="btn btn-soft-primary btn-icon rounded-circle me-3">
+                  <i class="bi-box-seam"></i>
+                </span>
+                <div>
+                  <h4 class="h6 mb-1">{% trans "Keep inventory accurate" %}</h4>
+                  <p class="text-muted mb-0">{% blocktrans trimmed %}Update stock levels after each shipment so out-of-stock products disappear from the storefront automatically.{% endblocktrans %}</p>
+                </div>
+              </li>
+              <li class="d-flex">
+                <span class="btn btn-soft-primary btn-icon rounded-circle me-3">
+                  <i class="bi-receipt"></i>
+                </span>
+                <div>
+                  <h4 class="h6 mb-1">{% trans "Automate invoices" %}</h4>
+                  <p class="text-muted mb-0">{% blocktrans trimmed %}Download invoices from the order detail view and send them with shipping confirmations for a premium experience.{% endblocktrans %}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <h2 class="h4 mb-3">{% trans "Ready to add your next collection?" %}</h2>
+      <p class="text-muted mb-4">{% blocktrans trimmed %}Sign in to the dashboard to create products, manage orders, and keep customers up to date from one place.{% endblocktrans %}</p>
+      <a class="btn btn-primary" href="{% url 'dashboard:check' %}">{% trans "Go to dashboard" %}</a>
+    </div>
+  </div>
+{% endblock content %}
