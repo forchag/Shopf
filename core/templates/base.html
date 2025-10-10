@@ -62,6 +62,9 @@
                 <a class="nav-link {% if request.resolver_match.view_name == 'website:about' %} active {% endif %}" href="{% url 'website:about' %}">{% trans "About us" %}</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.view_name == 'website:how_it_works' %} active {% endif %}" href="{% url 'website:how_it_works' %}">{% trans "How it works" %}</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.view_name == 'website:contact' %} active {% endif %}" href="{% url 'website:contact' %}">{% trans "Contact us" %}</a>
               </li>
               <li class="nav-item">

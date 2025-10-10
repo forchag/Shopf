@@ -14,6 +14,10 @@ class AboutView(TemplateView):
     template_name = "website/about.html"
 
 
+class HowItWorksView(TemplateView):
+    template_name = "website/how_it_works.html"
+
+
 class ContactView(CreateView, SuccessMessageMixin):
     template_name = "website/contact.html"
     model = TicketModel
